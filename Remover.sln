@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remover", "Remover\Remover.csproj", "{1ADFD94C-049A-42B4-BE4A-0E8D6C21879D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remover.WinApp", "Remover\Remover.WinApp.csproj", "{1ADFD94C-049A-42B4-BE4A-0E8D6C21879D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remover.DataAccess", "Remover.DataAccess\Remover.DataAccess.csproj", "{850A3134-73D0-457F-9C98-BFC258B9AD52}"
 EndProject
