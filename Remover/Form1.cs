@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Remover.Facade;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Remover.Entities.EnumType;
 
 namespace Remover
 {
@@ -17,8 +19,13 @@ namespace Remover
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExChangeBase exchange = ExchangeFactory.InstanExchange(ExchangeType.HuoBi);
 
+            decimal t= exchange.GetSingleNowPrice(CoinType.EOS, CurrencyType.USDT);
 
-
+            this.label1.Text = t.ToString();
+        }
     }
 }

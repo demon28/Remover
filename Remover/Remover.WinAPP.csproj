@@ -63,7 +63,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -91,6 +90,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Remover.DataAccess\Remover.DataAccess.csproj">
+      <Project>{850a3134-73d0-457f-9c98-bfc258b9ad52}</Project>
+      <Name>Remover.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Remover.Entities\Remover.Entities.csproj">
+      <Project>{137e1157-be75-435b-87c6-b0593db1561c}</Project>
+      <Name>Remover.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Remover.Facade\Remover.Facade.csproj">
+      <Project>{79bc171f-3a4d-491b-b318-ef50b403a373}</Project>
+      <Name>Remover.Facade</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

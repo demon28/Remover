@@ -20,7 +20,10 @@ using Winner.Framework.Core;
 using Winner.Framework.Core.DataAccess;
 using Winner.Framework.Core.DataAccess.MySql;
 using Winner.Framework.Utils;
-namespace Winner.WeFunny.DataAccess
+
+
+
+namespace Winner.Remover.DataAccess
 {
     /// <summary>
     /// Data Access Layer Object Of Tr_Exchange
