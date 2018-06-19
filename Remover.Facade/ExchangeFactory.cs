@@ -1,4 +1,5 @@
 ﻿using Remover.Entities;
+using Remover.Facade.ZBAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,14 @@ namespace Remover.Facade
                 case ExchangeType.Gate:
 
                     return new GateProduct(AppConfig.GateApiKey, AppConfig.GateSecretKey);
+
+                case ExchangeType.BiAn:
+
+                    return new BiAnProduct(AppConfig.BiAnApiKey, AppConfig.BiAnSecretKey);
+
+                case ExchangeType.ZB:
+
+                    return new ZBProduct(AppConfig.ZBApiKey, AppConfig.ZBSecretKey);
 
             }
 

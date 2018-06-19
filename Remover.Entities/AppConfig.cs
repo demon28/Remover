@@ -149,5 +149,44 @@ namespace Remover.Entities
 
 
 
+
+        /// <summary>
+        /// ZB API秘钥
+        /// </summary>
+        public static string ZBApiKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["ZBApiKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "3f2e9864-d0b3-4e28-9918-711b19bdb12c";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+        /// <summary>
+        /// Gate加密秘钥
+        /// </summary>
+        public static string ZBSecretKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["ZBSecretKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "f02d4027-506b-406b-ab66-a0d5769219e0";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+
+
+
+
     }
 }

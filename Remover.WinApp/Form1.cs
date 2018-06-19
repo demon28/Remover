@@ -38,11 +38,27 @@ namespace Remover
 
 
 
-            ExChangeBase exchange3= ExchangeFactory.InstanExchange(ExchangeType.Gate);
+            ExChangeBase exchange3 = ExchangeFactory.InstanExchange(ExchangeType.Gate);
 
             decimal l = exchange3.GetSingleNowPrice(CoinType.BTC, CurrencyType.USDT);
 
-            this.label3.Text = "Gate：" +l;
+            this.label3.Text = "Gate：" + l;
+
+
+
+            ExChangeBase exchange4 = ExchangeFactory.InstanExchange(ExchangeType.BiAn);
+
+            decimal j = exchange4.GetSingleNowPrice(CoinType.BTC, CurrencyType.USDT);
+
+            this.label4.Text = "币安：" + j;
+
+
+            ExChangeBase exchange5 = ExchangeFactory.InstanExchange(ExchangeType.ZB);
+
+            decimal k = exchange5.GetSingleNowPrice(CoinType.BTC, CurrencyType.USDT);
+
+            this.label5.Text = "中币网：" + k;
+
 
         }
     }

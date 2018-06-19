@@ -56,6 +56,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BiAnAPI\ApiUrlList.cs" />
+    <Compile Include="BiAnAPI\BiAnAPIFacade.cs" />
+    <Compile Include="BiAnProduct.cs" />
     <Compile Include="ExChangeBase.cs" />
     <Compile Include="ExchangeFactory.cs" />
     <Compile Include="GateAPI\ApiUrlList.cs" />
@@ -77,6 +80,10 @@
     <Compile Include="OkExAPI\stock\StockRestApi.cs" />
     <Compile Include="OkExProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZBAPI\ApiUrlList.cs" />
+    <Compile Include="ZBAPI\GateResponse.cs" />
+    <Compile Include="ZBAPI\ZbAPIFacade.cs" />
+    <Compile Include="ZBProduct.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

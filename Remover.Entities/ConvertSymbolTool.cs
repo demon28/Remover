@@ -10,6 +10,21 @@ namespace Remover.Entities
    public static class ConvertSymbolTool
     {
 
+
+
+        /// <summary>
+        /// 币安可用 btcusdt, bchbtc, rcneth 
+        /// </summary>
+        /// <param name="coin"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string BiAnConvertSymbol(CoinType coin, CurrencyType currency)
+        {
+            return "&symbol=" + (coin.ToString() + currency.ToString()).ToUpper();
+        }
+
+
+
         /// <summary>
         /// 火币可用 btcusdt, bchbtc, rcneth 
         /// </summary>
@@ -33,5 +48,19 @@ namespace Remover.Entities
         {
             return  (coin.ToString() + "_"+currency.ToString()).ToLower();
         }
+
+        
+
+        /// <summary>
+        ///  OKEx可用,GateIO可用 btc_usdt 
+        /// </summary>
+        /// <param name="coin"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string ZBConvertSymbol(CoinType coin, CurrencyType currency)
+        {
+            return "market="+(coin.ToString() + "_" + currency.ToString()).ToLower();
+        }
+
     }
 }
