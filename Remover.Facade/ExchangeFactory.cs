@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Winner.Framework.Core.Facade;
 using static Remover.Entities.EnumType;
 
 namespace Remover.Facade
 {
-    public class ExchangeFactory
+    public class ExchangeFactory:FacadeBase
     {
 
         public static ExChangeBase InstanExchange(ExchangeType exchange)
@@ -22,8 +23,9 @@ namespace Remover.Facade
                    
                 case ExchangeType.OKEX:
 
-                    return null;
-               
+                    return new OkExProduct(AppConfig.OkExApiKey, AppConfig.OkExSecretKey);
+
+
             }
 
             return null;

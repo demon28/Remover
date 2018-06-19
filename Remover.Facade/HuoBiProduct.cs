@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Remover.Entities;
-using Remover.Entities.HuoBiAPI;
-using static Remover.Entities.EnumType;
+﻿using Remover.Entities;
+using Remover.Facade.HuoBiAPI;
+using Remover.Entities.HBRequestModel;
 
 namespace Remover.Facade
 {
@@ -13,20 +8,20 @@ namespace Remover.Facade
     /// <summary>
     /// 火币实例
     /// </summary>
-    class HuoBiProduct : ExChangeBase
+    internal class HuoBiProduct : ExChangeBase
     {
 
 
         private string AccessKey, SeceretKey;
 
-        HuoBiApiTool api;
+        HuoBiApiFacade api;
 
         public  HuoBiProduct(string HuoBiApiAccessKey, string HuoBiApiSeceretKey)
         {
 
             AccessKey = HuoBiApiAccessKey;
             SeceretKey = HuoBiApiSeceretKey;
-            api = new HuoBiApiTool(AccessKey, SeceretKey);
+            api = new HuoBiApiFacade(AccessKey, SeceretKey);
         }
 
 
@@ -39,9 +34,14 @@ namespace Remover.Facade
         /// <returns></returns>
         public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency)
         {
-            string Symbol = ConvertSymbol(coin, currency);
+            string Symbol = ConvertSymbolTool.HBConvertSymbol(coin, currency);
 
-            var result = api.SendRequestContent<TicketRequest>(Entities.HuoBiAPI.ApiUrlList.API_Ticker, Symbol);
+            var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
+
+            if (result.tick.ask.Length<=0)
+            {
+                return 0;
+            }
 
             return result.tick.ask[0];
             

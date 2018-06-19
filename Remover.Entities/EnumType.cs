@@ -19,7 +19,8 @@ namespace Remover.Entities
         public enum CurrencyType
         {
             USDT=0,
-            CNY=1
+            CNY=1,
+            USD=2
         }
 
         public enum ExchangeType
@@ -37,15 +38,6 @@ namespace Remover.Entities
 
         }
 
-        /// <summary>
-        /// btcusdt, bchbtc, rcneth 
-        /// </summary>
-        /// <param name="coin"></param>
-        /// <param name="currency"></param>
-        /// <returns></returns>
-        public static string ConvertSymbol(CoinType coin, CurrencyType currency)
-        {
-            return "&symbol="+(coin.ToString() + currency.ToString()).ToLower();
-        }
+     
     }
 }

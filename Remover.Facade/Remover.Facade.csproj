@@ -58,7 +58,20 @@
   <ItemGroup>
     <Compile Include="ExChangeBase.cs" />
     <Compile Include="ExchangeFactory.cs" />
+    <Compile Include="HuoBiAPI\ApiUrlList.cs" />
+    <Compile Include="HuoBiAPI\HuoBiApiFacade.cs" />
+    <Compile Include="HuoBiAPI\HBResponse.cs" />
     <Compile Include="HuoBiProduct.cs" />
+    <Compile Include="OkExAPI\future\FutureRestApiV1.cs" />
+    <Compile Include="OkExAPI\future\IFutureRestApi.cs" />
+    <Compile Include="OkExAPI\OkExAPIFacade.cs" />
+    <Compile Include="OkExAPI\rest\Eample.cs" />
+    <Compile Include="OkExAPI\rest\HttpUtilManager.cs" />
+    <Compile Include="OkExAPI\rest\MD5Util.cs" />
+    <Compile Include="OkExAPI\rest\StringUtil.cs" />
+    <Compile Include="OkExAPI\stock\IStockRestApi.cs" />
+    <Compile Include="OkExAPI\stock\StockRestApi.cs" />
+    <Compile Include="OkExProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +87,9 @@
       <Project>{137e1157-be75-435b-87c6-b0593db1561c}</Project>
       <Name>Remover.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OkExAPI\RequestMo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

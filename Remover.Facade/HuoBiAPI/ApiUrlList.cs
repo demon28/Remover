@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Remover.Entities.HuoBiAPI
+namespace Remover.Facade.HuoBiAPI
 {
-    public static  class ApiUrlList
+    internal static  class ApiUrlList
     {
 
         public  const  string huobi_host = "api.huobi.pro";

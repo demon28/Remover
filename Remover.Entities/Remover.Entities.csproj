@@ -58,11 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="ConvertSymbolTool.cs" />
     <Compile Include="EnumType.cs" />
-    <Compile Include="HuoBiAPI\ApiUrlList.cs" />
-    <Compile Include="HuoBiAPI\HBResponse.cs" />
-    <Compile Include="HuoBiAPI\HBApiTool.cs" />
-    <Compile Include="HuoBiAPI\TicketRequest.cs" />
+    <Compile Include="HBRequestModel\TicketRequest.cs" />
+    <Compile Include="OKRequestModel\TicketRequset.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

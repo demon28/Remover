@@ -43,5 +43,42 @@ namespace Remover.Entities
 
 
 
+        /// <summary>
+        /// OKExAPI秘钥
+        /// </summary>
+        public static string OkExApiKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["OkExApiKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "daef2b70-357e-44bc-b2ed-dff4fd7edd15";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+        /// <summary>
+        /// OKEx加密秘钥
+        /// </summary>
+        public static string OkExSecretKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["OkExSecretKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "96886A15CB4FFFD0FCA4C5E0FB4C2D66";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+
+
+
     }
 }

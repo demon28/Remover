@@ -7,11 +7,11 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Winner.Framework.Core.Facade;
 
-
-namespace Remover.Entities.HuoBiAPI
+namespace Remover.Facade.HuoBiAPI
 {
-    public class HuoBiApiTool
+    public class HuoBiApiFacade:FacadeBase
     {
 
 
@@ -46,7 +46,7 @@ namespace Remover.Entities.HuoBiAPI
 
         #region 构造函数
         private RestClient client;//http请求客户端
-        public HuoBiApiTool(string accessKey, string secretKey, string huobi_host = "api.huobi.pro")
+        public HuoBiApiFacade(string accessKey, string secretKey, string huobi_host = "api.huobi.pro")
         {
             ACCESS_KEY = accessKey;
             SECRET_KEY = secretKey;
@@ -85,6 +85,11 @@ namespace Remover.Entities.HuoBiAPI
             Console.WriteLine(url);
             var request = new RestRequest(url, Method.GET);
             var result = client.Execute<HBResponse<T>>(request);
+            if (result.Content==null||result.Content==string.Empty)
+            {
+                Alert(result.ErrorMessage);
+                return default(T);
+            }
 
             return JsonConvert.DeserializeObject<T>(result.Content);
 

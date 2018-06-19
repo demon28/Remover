@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace Remover.Entities.HuoBiAPI
+namespace Remover.Facade.HuoBiAPI
 {
     public class HBResponse<T> where T : new()
     {

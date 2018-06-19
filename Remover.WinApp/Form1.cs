@@ -23,9 +23,18 @@ namespace Remover
         {
             ExChangeBase exchange = ExchangeFactory.InstanExchange(ExchangeType.HuoBi);
 
-            decimal t= exchange.GetSingleNowPrice(CoinType.EOS, CurrencyType.USDT);
+            decimal t = exchange.GetSingleNowPrice(CoinType.EOS, CurrencyType.USDT);
 
-            this.label1.Text = t.ToString();
+            this.label1.Text = "火币网：" + t.ToString();
+
+
+
+
+            ExChangeBase exchange2 = ExchangeFactory.InstanExchange(ExchangeType.OKEX);
+
+            decimal o = exchange2.GetSingleNowPrice(CoinType.EOS, CurrencyType.USDT);
+
+            this.label2.Text = "OKEX：" + o.ToString();
         }
     }
 }

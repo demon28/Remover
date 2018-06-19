@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Remover.Entities.HuoBiAPI
+
+namespace Remover.Entities.HBRequestModel
 {
     public class TicketRequest
     {
