@@ -58,6 +58,10 @@
   <ItemGroup>
     <Compile Include="ExChangeBase.cs" />
     <Compile Include="ExchangeFactory.cs" />
+    <Compile Include="GateAPI\ApiUrlList.cs" />
+    <Compile Include="GateAPI\GateAPIFacade.cs" />
+    <Compile Include="GateAPI\GateResponse.cs" />
+    <Compile Include="GateProduct.cs" />
     <Compile Include="HuoBiAPI\ApiUrlList.cs" />
     <Compile Include="HuoBiAPI\HuoBiApiFacade.cs" />
     <Compile Include="HuoBiAPI\HBResponse.cs" />

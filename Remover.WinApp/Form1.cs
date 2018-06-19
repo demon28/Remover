@@ -23,7 +23,7 @@ namespace Remover
         {
             ExChangeBase exchange = ExchangeFactory.InstanExchange(ExchangeType.HuoBi);
 
-            decimal t = exchange.GetSingleNowPrice(CoinType.EOS, CurrencyType.USDT);
+            decimal t = exchange.GetSingleNowPrice(CoinType.BTC, CurrencyType.USDT);
 
             this.label1.Text = "火币网：" + t.ToString();
 
@@ -32,9 +32,18 @@ namespace Remover
 
             ExChangeBase exchange2 = ExchangeFactory.InstanExchange(ExchangeType.OKEX);
 
-            decimal o = exchange2.GetSingleNowPrice(CoinType.EOS, CurrencyType.USDT);
+            decimal o = exchange2.GetSingleNowPrice(CoinType.BTC, CurrencyType.USDT);
 
             this.label2.Text = "OKEX：" + o.ToString();
+
+
+
+            ExChangeBase exchange3= ExchangeFactory.InstanExchange(ExchangeType.Gate);
+
+            decimal l = exchange3.GetSingleNowPrice(CoinType.BTC, CurrencyType.USDT);
+
+            this.label3.Text = "Gate：" +l;
+
         }
     }
 }

@@ -78,6 +78,75 @@ namespace Remover.Entities
 
 
 
+        /// <summary>
+        /// 币安API秘钥
+        /// </summary>
+        public static string BiAnApiKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["BiAnApiKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "G0pwhd4kV1LOKqtWAE5hUdvkMhoXZIgtUyx3Wsf3y74IbNdwk7XOaxJE5vcdq8UA";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+        /// <summary>
+        /// 币安加密秘钥
+        /// </summary>
+        public static string BiAnSecretKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["OkExSecretKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "f5AFEYi1qZZQm6FRil8bpRa29qeqRkxbLaOrlQBBpGdWjdwNvKKuzQ9znmfPeQ7k";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+        /// <summary>
+        /// Gate API秘钥
+        /// </summary>
+        public static string GateApiKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["GateApiKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "AC0A66AF-2140-4D77-AEB4-D998C389C470";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+        /// <summary>
+        /// Gate加密秘钥
+        /// </summary>
+        public static string GateSecretKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["GateSecretKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "aa6f6724c0bc992054f8a1d86869fb8c6dbc12edbd3f1cca378beee2cd6e913f";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+
 
 
     }

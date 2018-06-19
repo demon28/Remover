@@ -11,7 +11,7 @@ namespace Remover.Entities
     {
 
         /// <summary>
-        /// 火币btcusdt, bchbtc, rcneth 
+        /// 火币可用 btcusdt, bchbtc, rcneth 
         /// </summary>
         /// <param name="coin"></param>
         /// <param name="currency"></param>
@@ -24,7 +24,7 @@ namespace Remover.Entities
 
 
         /// <summary>
-        ///  OKEx btcusdt, bchbtc, rcneth 
+        ///  OKEx可用,GateIO可用 btc_usdt 
         /// </summary>
         /// <param name="coin"></param>
         /// <param name="currency"></param>

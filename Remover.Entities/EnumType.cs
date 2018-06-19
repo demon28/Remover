@@ -27,6 +27,7 @@ namespace Remover.Entities
         {
             HuoBi=0,
             OKEX=1,
+            Gate=2
         }
 
         public enum SymbolType

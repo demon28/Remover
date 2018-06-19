@@ -19,12 +19,14 @@ namespace Remover.Facade
             {
                 case ExchangeType.HuoBi:
                     return new HuoBiProduct(AppConfig.HuoBiApiAccessKey, AppConfig.HuoBiApiSeceretKey);
-
                    
                 case ExchangeType.OKEX:
 
                     return new OkExProduct(AppConfig.OkExApiKey, AppConfig.OkExSecretKey);
 
+                case ExchangeType.Gate:
+
+                    return new GateProduct(AppConfig.GateApiKey, AppConfig.GateSecretKey);
 
             }
 
