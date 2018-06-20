@@ -19,7 +19,10 @@ namespace Remover.Facade
             api = new BiAnAPIFacade(AccessKey, SeceretKey);
         }
 
-
+        public override string GetExchangeName()
+        {
+            return "币安";
+        }
 
         /// <summary>
         /// 获取单个币种在火币的价格
@@ -27,7 +30,7 @@ namespace Remover.Facade
         /// <param name="coin"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency)
+        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency=EnumType.CurrencyType.USDT)
         {
             string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
 

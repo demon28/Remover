@@ -15,7 +15,7 @@ namespace Remover.Facade
         private string Apikey,Seceretkey;
         GateAPIFacade gateAPI;
 
-
+      
         public GateProduct(string apiKey,string seceretKey)
         {
             Apikey = apiKey;
@@ -23,9 +23,12 @@ namespace Remover.Facade
 
             gateAPI = new GateAPIFacade(Apikey, Seceretkey);
         }
+        public override string GetExchangeName()
+        {
+            return "GateIO";
+        }
 
-
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency)
+        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             string Symbol = ConvertSymbolTool.OKConvertSymbol(coin, currency);
 

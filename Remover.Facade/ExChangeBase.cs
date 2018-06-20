@@ -17,9 +17,9 @@ namespace Remover.Facade
         /// <param name="coin">币种</param>
         /// <param name="currency">锚定单位</param>
         /// <returns></returns>
-        public abstract decimal  GetSingleNowPrice(CoinType coin,CurrencyType currency);
+        public abstract decimal  GetSingleNowPrice(CoinType coin,CurrencyType currency= CurrencyType.USDT);
 
-
+        public abstract string GetExchangeName();
 
     }
 }

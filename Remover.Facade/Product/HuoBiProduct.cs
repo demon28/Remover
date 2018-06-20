@@ -24,6 +24,11 @@ namespace Remover.Facade
             api = new HuoBiApiFacade(AccessKey, SeceretKey);
         }
 
+        public override string GetExchangeName()
+        {
+            return "火币";
+        }
+
 
 
         /// <summary>
@@ -32,7 +37,7 @@ namespace Remover.Facade
         /// <param name="coin"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency)
+        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             string Symbol = ConvertSymbolTool.HBConvertSymbol(coin, currency);
 
@@ -43,7 +48,7 @@ namespace Remover.Facade
                 return 0;
             }
 
-            return result.tick.ask[0];
+            return decimal.Parse(result.tick.ask[0].ToString("f3"));
             
         }
     }

@@ -24,7 +24,10 @@ namespace Remover.Facade
             api = new ZbAPIFacade(AccessKey, SeceretKey);
         }
 
-
+        public override string GetExchangeName()
+        {
+            return "ZB(中币)";
+        }
 
         /// <summary>
         /// 获取单个币种在火币的价格
@@ -32,7 +35,7 @@ namespace Remover.Facade
         /// <param name="coin"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency)
+        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             string Symbol = ConvertSymbolTool.ZBConvertSymbol(coin, currency);
 

@@ -13,7 +13,12 @@ namespace Remover.Entities
             BTC=0,   //比特币
             LTC=1,   //莱特币
             ETH=2,   //以太坊
-            EOS=3    //柚子
+            EOS=3,    //柚子
+            TRX=4,    //波场
+            NEO=5,    //小蚁
+            XRP=6,   //瑞波币
+            ETC=7,    //以太经典
+
         }
 
         public enum CurrencyType

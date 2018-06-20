@@ -25,8 +25,11 @@ namespace Remover.Facade
         }
 
 
-
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency)
+        public override string GetExchangeName()
+        {
+            return "OkEx";
+        }
+        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             string symbol = ConvertSymbolTool.OKConvertSymbol(coin, currency);
 
