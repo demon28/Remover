@@ -20,7 +20,7 @@ namespace Remover.Entities.GateRequestModel
         /// <summary>
         /// 买方最高价
         /// </summary>
-        public decimal highestBid;
+        public decimal highestBid;  
         /// <summary>
         /// 涨跌百分比
         /// </summary>

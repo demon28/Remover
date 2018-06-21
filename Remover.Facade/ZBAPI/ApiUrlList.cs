@@ -11,8 +11,15 @@ namespace Remover.Facade.ZBAPI
         //http://api.zb.com/data/v1/ticker
 
 
+            /// <summary>
+            /// 单个币种
+            /// </summary>
         public const string API_Ticker = "/data/v1/ticker";
 
 
+        /// <summary>
+        /// 所有币价
+        /// </summary>
+        public const string API_Market = "/data/v1/allTicker";
     }
 }

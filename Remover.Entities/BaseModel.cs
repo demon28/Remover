@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Remover.Facade.GateAPI
+namespace Remover.Entities
 {
-   public class GateResponsee<T> where T : new()
+   public class BaseModel
     {
-        public bool result;
-        public T Data;
-
     }
 }

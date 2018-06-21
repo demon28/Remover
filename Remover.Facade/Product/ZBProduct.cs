@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,49 @@ namespace Remover.Facade
             SeceretKey = HuoBiApiSeceretKey;
             api = new ZbAPIFacade(AccessKey, SeceretKey);
         }
+
+        public override Dictionary<string, decimal> GetAllPrice()
+        {
+
+            try
+                {
+                Dictionary<string, decimal> dic = new Dictionary<string, decimal>();
+
+                var list = api.SendRequestContent<Dictionary<string, Hpybtc>>(ApiUrlList.API_Market);
+
+                var l = list.Where(S => S.Key.Contains("usdt"));
+
+                foreach (var item in l)
+                {
+
+                    var key = string.Empty;
+
+                    if (item.Key.Length == 7)
+                    {
+                        key = item.Key.Insert(3, "_");
+                    }
+                    else if (item.Key.Length == 8)
+                    {
+                        key = item.Key.Insert(4, "_");
+                    }
+                    else
+                    {
+                        key = item.Key.Insert(5, "_");
+                    }
+                    key = key.ToLower();
+
+                    dic.Add(key, item.Value.last);
+                }
+
+                return dic;
+            }
+                catch (Exception e)
+                {
+                    Alert(e.ToString());
+
+                    return null;
+                }
+          }
 
         public override string GetExchangeName()
         {

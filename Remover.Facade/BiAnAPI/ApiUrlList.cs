@@ -8,7 +8,22 @@ namespace Remover.Facade.BiAnAPI
 {
     public static class ApiUrlList
     {
-        public const string Url_Ticker = "/api/v1/ticker/24hr";
+
+        //https://api.binance.com/api/v1/ticker/24hr
+
+
+        /// <summary>
+        /// 加参数为获取该币种价格
+        /// </summary>
+        public const string API_Ticker = "/api/v1/ticker/24hr";
+
+
+        /// <summary>
+        /// 不加参数为获取该币种价格
+        /// </summary>
+        public const string API_Market = "/api/v1/ticker/24hr";
+
+
 
 
     }

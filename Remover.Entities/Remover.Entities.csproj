@@ -58,15 +58,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="BaseModel.cs" />
     <Compile Include="BiAnRequestModel\TicketRequest.cs" />
     <Compile Include="ConvertSymbolTool.cs" />
     <Compile Include="DBTickertModel.cs" />
     <Compile Include="EnumType.cs" />
+    <Compile Include="GateRequestModel\MarketRequestModel.cs" />
     <Compile Include="GateRequestModel\TicketRequest.cs" />
+    <Compile Include="HBRequestModel\MarketRequestModel.cs" />
     <Compile Include="HBRequestModel\TicketRequest.cs" />
+    <Compile Include="OKRequestModel\MarketRequestModel.cs" />
     <Compile Include="OKRequestModel\TicketRequset.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrlHelper.cs" />
+    <Compile Include="ZBRequsetModel\MarketRequsetModel.cs" />
     <Compile Include="ZBRequsetModel\TicketRequest.cs" />
   </ItemGroup>
   <ItemGroup>

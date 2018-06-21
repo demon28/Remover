@@ -1,5 +1,6 @@
 ﻿using Remover.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,19 @@ namespace Remover.Facade
         /// <returns></returns>
         public abstract decimal  GetSingleNowPrice(CoinType coin,CurrencyType currency= CurrencyType.USDT);
 
+        /// <summary>
+        /// 获取交易所名称
+        /// </summary>
+        /// <returns></returns>
         public abstract string GetExchangeName();
+
+
+        /// <summary>
+        /// 获取交易所所有币价
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public abstract Dictionary<string,decimal> GetAllPrice();
 
     }
 }

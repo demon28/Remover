@@ -1,6 +1,9 @@
 ﻿using Remover.Entities;
 using Remover.Entities.BiAnRequestModel;
 using Remover.Facade.BiAnAPI;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Remover.Facade
 {
@@ -19,6 +22,55 @@ namespace Remover.Facade
             api = new BiAnAPIFacade(AccessKey, SeceretKey);
         }
 
+        public override Dictionary<string,decimal> GetAllPrice() 
+        {
+
+            
+            try {
+
+             Dictionary<string, decimal> dic = new Dictionary<string, decimal>();
+
+            List<TicketRequest> list = api.SendRequestContent<List<TicketRequest>>(ApiUrlList.API_Market);
+
+            List<TicketRequest> l=list.FindAll(S => S.symbol.Contains("USDT"));
+
+            
+            foreach (var item in l)
+            {
+                if (item.symbol.Length == 7)
+                {
+                    item.symbol = item.symbol.Insert(3, "_");
+                }
+                else if(item.symbol.Length == 8)
+                {
+                    item.symbol = item.symbol.Insert(4, "_");
+                }
+                else
+                {
+                    item.symbol = item.symbol.Insert(5, "_");
+                }
+
+                  item.symbol = item.symbol.ToLower();
+
+                    dic.Add(item.symbol, item.lastPrice);
+
+             }
+           
+
+
+
+            return dic;
+            }
+            catch (Exception e)
+            {
+                Alert(e.ToString());
+
+                return null;
+            }
+        }
+
+    
+
         public override string GetExchangeName()
         {
             return "币安";
@@ -34,7 +86,7 @@ namespace Remover.Facade
         {
             string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
 
-            var result = api.SendRequestContent<TicketRequest>(ApiUrlList.Url_Ticker, Symbol);
+            var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
 
             if (result.lastPrice<= 0)
             {

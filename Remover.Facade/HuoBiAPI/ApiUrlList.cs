@@ -24,6 +24,13 @@ namespace Remover.Facade.HuoBiAPI
         /// </summary>
         public const string API_Ticker = "/market/detail/merged";
 
+        /// <summary>
+        /// 所有币价
+        /// </summary>
+        public const string API_Market = "/market/tickers";
+
+      
+
 
 
 

@@ -84,9 +84,9 @@ namespace Remover.Facade.HuoBiAPI
             parameters += $"&Signature={sign}";
 
             var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
-            Console.WriteLine(url);
+   
             var request = new RestRequest(url, Method.GET);
-            var result = client.Execute<HBResponse<T>>(request);
+            var result = client.Execute(request);
             if (result.Content==null||result.Content==string.Empty)
             {
                 Alert(result.ErrorMessage);
@@ -98,52 +98,55 @@ namespace Remover.Facade.HuoBiAPI
         }
 
 
-            
 
-        /// <summary>
-        /// 发起Http请求
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="resourcePath"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public HBResponse<T> SendRequest<T>(string resourcePath, string parameters = "") where T : new()
-        {
-            parameters = UrlHelper.UriEncodeParameterValue(GetCommonParameters() + parameters);//请求参数
-            var sign = UrlHelper.GetSignatureStr(Method.GET, HUOBI_HOST, resourcePath, parameters,SECRET_KEY);//签名
-            parameters += $"&Signature={sign}";
+        #region 官网demo
+        ///// <summary>
+        ///// 发起Http请求
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="resourcePath"></param>
+        ///// <param name="parameters"></param>
+        ///// <returns></returns>
+        //public HBResponse<T> SendRequest<T>(string resourcePath, string parameters = "") where T : new()
+        //{
+        //    parameters = UrlHelper.UriEncodeParameterValue(GetCommonParameters() + parameters);//请求参数
+        //    var sign = UrlHelper.GetSignatureStr(Method.GET, HUOBI_HOST, resourcePath, parameters,SECRET_KEY);//签名
+        //    parameters += $"&Signature={sign}";
 
-            var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
-            Console.WriteLine(url);
-            var request = new RestRequest(url, Method.GET);
-            var result = client.Execute<HBResponse<T>>(request);
-            return result.Data;
-        }
-        /// <summary>
-        /// 发起Http请求
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="P"></typeparam>
-        /// <param name="resourcePath"></param>
-        /// <param name="postParameters"></param>
-        /// <returns></returns>
-        public HBResponse<T> SendRequest<T, P>(string resourcePath, P postParameters) where T : new()
-        {
-            var parameters = UrlHelper.UriEncodeParameterValue(GetCommonParameters());//请求参数
-            var sign = UrlHelper.GetSignatureStr(Method.POST, HUOBI_HOST, resourcePath, parameters,SECRET_KEY);//签名
-            parameters += $"&Signature={sign}";
+        //    var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
+        //    Console.WriteLine(url);
+        //    var request = new RestRequest(url, Method.GET);
+        //    var result = client.Execute<HBResponse<T>>(request);
+        //    return result.Data;
+        //}
+        ///// <summary>
+        ///// 发起Http请求
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <typeparam name="P"></typeparam>
+        ///// <param name="resourcePath"></param>
+        ///// <param name="postParameters"></param>
+        ///// <returns></returns>
+        //public HBResponse<T> SendRequest<T, P>(string resourcePath, P postParameters) where T : new()
+        //{
+        //    var parameters = UrlHelper.UriEncodeParameterValue(GetCommonParameters());//请求参数
+        //    var sign = UrlHelper.GetSignatureStr(Method.POST, HUOBI_HOST, resourcePath, parameters,SECRET_KEY);//签名
+        //    parameters += $"&Signature={sign}";
 
-            var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
-            Console.WriteLine(url);
-            var request = new RestRequest(url, Method.POST);
-            request.AddJsonBody(postParameters);
-            foreach (var item in request.Parameters)
-            {
-                item.Value = item.Value.ToString().Replace("_", "-");
-            }
-            var result = client.Execute<HBResponse<T>>(request);
-            return result.Data;
-        }
+        //    var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
+        //    Console.WriteLine(url);
+        //    var request = new RestRequest(url, Method.POST);
+        //    request.AddJsonBody(postParameters);
+        //    foreach (var item in request.Parameters)
+        //    {
+        //        item.Value = item.Value.ToString().Replace("_", "-");
+        //    }
+        //    var result = client.Execute<HBResponse<T>>(request);
+        //    return result.Data;
+        //}
+
+
+        #endregion
 
         /// <summary>
         /// 获取通用签名参数
