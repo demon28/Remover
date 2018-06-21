@@ -16,7 +16,7 @@ namespace Remover.Facade
 
         HuoBiApiFacade api;
 
-        public  HuoBiProduct(string HuoBiApiAccessKey, string HuoBiApiSeceretKey)
+        public HuoBiProduct(string HuoBiApiAccessKey, string HuoBiApiSeceretKey)
         {
 
             AccessKey = HuoBiApiAccessKey;
@@ -39,17 +39,25 @@ namespace Remover.Facade
         /// <returns></returns>
         public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
-            string Symbol = ConvertSymbolTool.HBConvertSymbol(coin, currency);
 
-            var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
+            try
+            {
+                string Symbol = ConvertSymbolTool.HBConvertSymbol(coin, currency);
 
-            if (result.tick.ask.Length<=0)
+                var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
+
+                if (result.tick.ask.Length <= 0)
+                {
+                    return 0;
+                }
+
+                return decimal.Parse(result.tick.ask[0].ToString("f3"));
+            }
+            catch
             {
                 return 0;
             }
-
-            return decimal.Parse(result.tick.ask[0].ToString("f3"));
-            
+           
         }
     }
 }

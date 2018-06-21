@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Remover.Entities.EnumType;
@@ -18,24 +19,10 @@ namespace Remover
         public Form1()
         {
             InitializeComponent();
-        }
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            GetSingle();
-
-        }
-
-
-        private void GetSingle()
-        {
            
-
-          
         }
+
+
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -46,22 +33,52 @@ namespace Remover
             coinTypes.Add(CoinType.LTC);
             coinTypes.Add(CoinType.ETH);
             coinTypes.Add(CoinType.ETC);
-       
+
             coinTypes.Add(CoinType.XRP);
             coinTypes.Add(CoinType.NEO);
 
-            SubScribeFacade subScribeFacade = new SubScribeFacade(coinTypes);
+
+            ExChangeBase exchange1 = ExchangeFactory.InstanExchange(ExchangeType.HuoBi);
+            ExChangeBase exchange2 = ExchangeFactory.InstanExchange(ExchangeType.OKEX);
+            ExChangeBase exchange3 = ExchangeFactory.InstanExchange(ExchangeType.Gate);
+            ExChangeBase exchange4 = ExchangeFactory.InstanExchange(ExchangeType.BiAn);
+            ExChangeBase exchange5 = ExchangeFactory.InstanExchange(ExchangeType.ZB);
+
+            List<ExChangeBase> exChanges = new List<ExChangeBase>();
+            exChanges.Add(exchange1);
+            exChanges.Add(exchange2);
+            exChanges.Add(exchange3);
+            exChanges.Add(exchange4);
+            exChanges.Add(exchange5);
 
 
-            this.dataGridView1.DataSource = subScribeFacade.Enter();
+            SubScribeFacade subScribeFacade = new SubScribeFacade(coinTypes, exChanges);
+            
+             dataGridView1.DataSource = subScribeFacade.Enter();
 
 
 
 
-            AutoSizeColumn(this.dataGridView1);
+
+            AutoSizeColumn(dataGridView1);
+        {
 
 
-        }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         /// <summary>
