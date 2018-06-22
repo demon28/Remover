@@ -8,24 +8,34 @@ namespace Remover.WebApp
         // 有关捆绑的详细信息，请访问 https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
+                        "~/Content/assets/css/bootstrap.css",
+                        "~/Content/assets/css/ace-*",
+                        "~/Content/assets/css/ace.css",
+                        "~/Content/components/font-awesome/css/font-awesome.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                "~/Content/components/jquery/dist/jquery.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                "~/Content/Scripts/jquery.validate*"));
 
-            // 使用要用于开发和学习的 Modernizr 的开发版本。然后，当你做好
-            // 生产准备就绪，请使用 https://modernizr.com 上的生成工具仅选择所需的测试。
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/aceScript").Include(
+                "~/Content/assets/js/src/ace.js",
+                "~/Content/assets/js/src/elements.*",
+                "~/Content/assets/js/src/ace.*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/pluginScripts").Include(
+                "~/Content/components/datatables/media/js/jquery.dataTables.js",
+                "~/Content/components/_mod/datatables/jquery.dataTables.bootstrap.js",
+                "~/Content/components/datatables.net-buttons/js/buttons.*",
+                "~/Content/components/datatables.net-buttons/js/dataTables.buttons.min.js",
+                "~/Content/components/datatables.net-select/js/dataTables.select.min"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/bootScripts").Include(
+                "~/Content/Scripts/knockout-2.2.0.js",
+                "~/Content/components/bootstrap/dist/js/bootstrap.js",
+                "~/Content/Scripts/bootbox.min.js"));
         }
     }
 }
