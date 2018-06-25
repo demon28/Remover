@@ -185,6 +185,37 @@ namespace Remover.Entities
 
 
 
+        public static string EalApiKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["EalApiKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "3b33942c4147a6dadc533459946ccef7";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
+        /// <summary>
+        /// Gate加密秘钥
+        /// </summary>
+        public static string EalSecretKey
+        {
+            get
+            {
+                string ApiSignKey = System.Configuration.ConfigurationManager.AppSettings["EalSecretKey"];
+                if (string.IsNullOrEmpty(ApiSignKey))
+                {
+                    return "8df43c076cc6c68e710fbd13cd3817c7";
+                }
+                return ApiSignKey;
+            }
+        }
+
+
 
 
 
