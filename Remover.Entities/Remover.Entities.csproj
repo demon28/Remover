@@ -60,6 +60,8 @@
     <Compile Include="AppConfig.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="BiAnRequestModel\TicketRequest.cs" />
+    <Compile Include="CoinealRequestModel\MarketRequestModel.cs" />
+    <Compile Include="CoinealRequestModel\TicketRequest.cs" />
     <Compile Include="ConvertSymbolTool.cs" />
     <Compile Include="DBTickertModel.cs" />
     <Compile Include="EnumType.cs" />

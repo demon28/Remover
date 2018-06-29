@@ -1,4 +1,5 @@
 ﻿using Remover.Entities;
+using Remover.Facade.Product;
 using Remover.Facade.ZBAPI;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,9 @@ namespace Remover.Facade
                 case ExchangeType.ZB:
 
                     return new ZBProduct(AppConfig.ZBApiKey, AppConfig.ZBSecretKey);
+                case ExchangeType.Coineal:
 
+                    return new CoinealProduct(AppConfig.EalApiKey, AppConfig.EalSecretKey);
             }
 
             return null;

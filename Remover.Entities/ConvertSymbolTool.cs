@@ -13,7 +13,7 @@ namespace Remover.Entities
 
 
         /// <summary>
-        /// 币安可用 btcusdt, bchbtc, rcneth 
+        /// 币安可用, BTCUSDT 
         /// </summary>
         /// <param name="coin"></param>
         /// <param name="currency"></param>

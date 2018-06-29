@@ -30,8 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Javirs.Common, Version=2.6.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Javirs.Common.2.6.23\lib\net40\Javirs.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=106.3.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.3.1\lib\net452\RestSharp.dll</HintPath>
@@ -58,12 +76,15 @@
   <ItemGroup>
     <Compile Include="BiAnAPI\ApiUrlList.cs" />
     <Compile Include="BiAnAPI\BiAnAPIFacade.cs" />
+    <Compile Include="CoinealAPI\ApiUrlList.cs" />
+    <Compile Include="CoinealAPI\CoinealAPIFacade.cs" />
     <Compile Include="OkExAPI\ApiUrlList.cs" />
     <Compile Include="Product\BiAnProduct.cs" />
     <Compile Include="ExChangeBase.cs" />
     <Compile Include="ExchangeFactory.cs" />
     <Compile Include="GateAPI\ApiUrlList.cs" />
     <Compile Include="GateAPI\GateAPIFacade.cs" />
+    <Compile Include="Product\CoinealProduct.cs" />
     <Compile Include="Product\GateProduct.cs" />
     <Compile Include="HuoBiAPI\ApiUrlList.cs" />
     <Compile Include="HuoBiAPI\HuoBiApiFacade.cs" />

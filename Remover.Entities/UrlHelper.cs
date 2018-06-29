@@ -12,6 +12,30 @@ namespace Remover.Entities
     public static class UrlHelper
     {
 
+
+
+
+
+        /// <summary>
+        /// 拼接&
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string PrameterAndStr(Dictionary<string,string> dic)
+        {
+
+            string prametesr = string.Empty;
+
+            foreach (var item in dic)
+            {
+                prametesr += "&" + item.Key.ToString()+"="+item.Value;
+            }
+            prametesr.TrimStart('&');
+
+            return prametesr;
+        }
+
+
         /// <summary>
         /// Uri参数值进行转义(火币适用)
         /// </summary>

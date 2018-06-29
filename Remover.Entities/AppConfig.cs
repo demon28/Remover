@@ -184,7 +184,9 @@ namespace Remover.Entities
         }
 
 
-
+        /// <summary>
+        /// Coineal API秘钥
+        /// </summary>
         public static string EalApiKey
         {
             get
@@ -200,7 +202,7 @@ namespace Remover.Entities
 
 
         /// <summary>
-        /// Gate加密秘钥
+        /// Coineal 加密秘钥
         /// </summary>
         public static string EalSecretKey
         {
