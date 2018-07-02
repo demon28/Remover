@@ -46,10 +46,21 @@ namespace Remover.Entities
         /// <returns></returns>
         public static string OKConvertSymbol(CoinType coin, CurrencyType currency)
         {
-            return  (coin.ToString() + "_"+currency.ToString()).ToLower();
+            return "symbol="+(coin.ToString() + "_"+currency.ToString()).ToLower();
         }
 
-        
+
+        /// <summary>
+        ///  GateIO可用 btc_usdt 
+        /// </summary>
+        /// <param name="coin"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string GateConvertSymbol(CoinType coin, CurrencyType currency)
+        {
+            return (coin.ToString() + "_" + currency.ToString()).ToLower();
+        }
+
 
         /// <summary>
         ///  OKEx可用,GateIO可用 btc_usdt 

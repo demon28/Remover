@@ -29,6 +29,7 @@ namespace Remover.Facade.Product
         public override Dictionary<string, decimal> GetAllPrice()
         {
 
+            try { 
             Dictionary<string, decimal> dic = new Dictionary<string, decimal>();
 
             MarketRequest marketRequest= coinealAPI.EnSendRequestContent<MarketRequest>(ApiUrlList.API_Market);
@@ -56,6 +57,12 @@ namespace Remover.Facade.Product
 
 
             return dic;
+            }
+            catch(Exception e)
+            {
+                Alert(e.ToString());
+                return null;
+            }
 
         }
 

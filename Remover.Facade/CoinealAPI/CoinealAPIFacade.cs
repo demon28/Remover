@@ -26,6 +26,7 @@ namespace Remover.Facade.CoinealAPI
             client = new RestClient(HUOBI_HOST_URL);
             client.AddDefaultHeader("Content-Type", "application/json");
             client.AddDefaultHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
+       
         }
 
         /// <summary>
