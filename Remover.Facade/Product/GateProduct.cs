@@ -66,7 +66,7 @@ namespace Remover.Facade
 
             var result = gateAPI.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
 
-            if (result.last == 0)
+            if (result.last == 0 || result == null )
             {
                 return 0;
             }

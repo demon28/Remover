@@ -77,7 +77,7 @@ namespace Remover.Facade.Product
 
             var result = coinealAPI.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
 
-            if (result.data.buy <= 0)
+            if (result == null || result.data.buy <= 0)
             {
                 return 0;
             }
