@@ -65,7 +65,7 @@ namespace Remover.Facade
 
             TicketRequset ticket= OkAPi.SendRequestContent<TicketRequset>(ApiUrlList.API_Ticker, symbol);
 
-            if (ticket==null)
+            if (ticket==null|| ticket.ticker==null)
             {
                 Alert("获取价格失败！");
                 return 0;

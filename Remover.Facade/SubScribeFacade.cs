@@ -51,46 +51,46 @@ namespace Remover.Facade
         }
 
 
-        //public DataTable Enter()
-        //{
+        public DataTable Enter()
+        {
 
 
-        //    DataTable dt = new DataTable();
-        //    dt.Columns.Add("交易所");
+            DataTable dt = new DataTable();
+            dt.Columns.Add("交易所");
 
 
-        //    foreach (var item in CoinList)
-        //    {
-        //        dt.Columns.Add(item.ToString());
-        //    }
+            foreach (var item in CoinList)
+            {
+                dt.Columns.Add(item.ToString());
+            }
 
-        //    for (int i = 0; i < ExChanges.Count; i++)
-        //    {
-        //        dt.Rows.Add();
-        //        dt.Rows[i][0] = ExChanges[i].GetExchangeName();
+            for (int i = 0; i < ExChanges.Count; i++)
+            {
+                dt.Rows.Add();
+                dt.Rows[i][0] = ExChanges[i].GetExchangeName();
 
-        //        for (int j = 0; j < CoinList.Count; j++)
-        //        {
+                for (int j = 0; j < CoinList.Count; j++)
+                {
 
-        //            FuncHandle fh = new FuncHandle(this.AscySingle);
+                    FuncHandle fh = new FuncHandle(this.AscySingle);
 
-        //            IAsyncResult ar = fh.BeginInvoke(ExChanges[i], CoinList[j], null, fh);
-
-
-        //            dt.Rows[i][j + 1] = fh.EndInvoke(ar);
-        //        }
-        //    }
-
-        //    return dt;
-        //}
+                    IAsyncResult ar = fh.BeginInvoke(ExChanges[i], CoinList[j], null, fh);
 
 
-        //public decimal AscySingle(ExChangeBase ex, CoinType coin)
-        //{
+                    dt.Rows[i][j + 1] = fh.EndInvoke(ar);
+                }
+            }
 
-        //    return ex.GetSingleNowPrice(coin);
+            return dt;
+        }
 
-        //}
+
+        public decimal AscySingle(ExChangeBase ex, CoinType coin)
+        {
+
+         return  ex.GetSingleNowPrice(coin);
+
+        }
 
         /// <summary>
         /// 获取所有币种所有价格组成DataTable
@@ -101,134 +101,40 @@ namespace Remover.Facade
             DataTable dt = new DataTable();
             dt.Columns.Add("交易所");
 
-            Dictionary<string, decimal> dataBiAn = new Dictionary<string, decimal>();
-           Dictionary<string, decimal> dataHuobi = new Dictionary<string, decimal>();
-            Dictionary<string, decimal> dataGateIO = new Dictionary<string, decimal>();
-            Dictionary<string, decimal> dataOkEx = new Dictionary<string, decimal>();
-            Dictionary<string, decimal> dataZb = new Dictionary<string, decimal>();
-
-            if (exChangesList.Keys.Contains(Entities.EnumType.ExchangeType.BiAn))
+            for (int i = 0; i < exChangesList.Count; i++)
             {
-                dataBiAn = AllBiAn(exChangesList[ExchangeType.BiAn]);
-                dt.Columns.Add(ExchangeType.BiAn.ToString());
+
+                var item = exChangesList.ElementAt(i);
+
+                Dictionary<string, decimal> data =item.Value.GetAllPrice();
+
+                dt.Columns.Add(item.Value.GetExchangeName());
+
+                for (int j = 0; j < CoinList.Count; j++)
+                {
+                    dt.Rows.Add();
+                    string val = CoinList[j].ToString().ToLower() + "_" + "usdt";
+                    dt.Rows[j][0] = val;
+                }
+                for (int k = 0; k < CoinList.Count; k++)
+                {
+                    string val = CoinList[k].ToString().ToLower() + "_" + "usdt";
+
+                    try {
+                        dt.Rows[k][i + 1] = data.SingleOrDefault(S => S.Key.Equals(val)).Value;
+                    }
+                    catch
+                    {
+                        dt.Rows[k][i + 1] = 0;
+                    }
+                }
+
             }
-
-
-            if (exChangesList.Keys.Contains(Entities.EnumType.ExchangeType.HuoBi))
-            {
-                dataHuobi = AllHuobi(exChangesList[ExchangeType.HuoBi]);
-                dt.Columns.Add(ExchangeType.HuoBi.ToString());
-
-            }
-
-
-            if (exChangesList.Keys.Contains(Entities.EnumType.ExchangeType.Gate))
-            {
-                dataGateIO = AllGateIO(exChangesList[ExchangeType.Gate]);
-                dt.Columns.Add(ExchangeType.Gate.ToString());
-            }
-
-            if (exChangesList.Keys.Contains(Entities.EnumType.ExchangeType.OKEX))
-            {
-                dataOkEx = AllOkEx(exChangesList[ExchangeType.OKEX]);
-                dt.Columns.Add(ExchangeType.OKEX.ToString());
-            }
-
-            if (exChangesList.Keys.Contains(Entities.EnumType.ExchangeType.ZB))
-            {
-                dataZb = AllZb(exChangesList[ExchangeType.ZB]);
-                dt.Columns.Add(ExchangeType.ZB.ToString());
-            }
-
-
-            for (int i=0;i<CoinList.Count;i++)
-            {
-                dt.Rows.Add();
-
-                string val = CoinList[i].ToString().ToLower() + "_" + "usdt";
-                dt.Rows[i][0] = val;
-                try
-                {
-                    dt.Rows[i][1] = dataBiAn.SingleOrDefault(S => S.Key.Equals(val)).Value;
-                }
-                catch
-                {
-                    dt.Rows[i][1] = "无";
-                }
-
-                try
-                {
-                    dt.Rows[i][2] = dataHuobi.SingleOrDefault(S => S.Key.Equals(val)).Value;
-                }
-                catch
-                {
-                    dt.Rows[i][2] = "无";
-                }
-
-                try
-                {
-                    dt.Rows[i][3] = dataGateIO.SingleOrDefault(S => S.Key.Equals(val)).Value;
-                }
-                catch
-                {
-                    dt.Rows[i][3] = "无";
-                }
-
-                try
-                {
-                    dt.Rows[i][4] = dataOkEx.SingleOrDefault(S => S.Key.Equals(val)).Value;
-                }
-                catch
-                {
-                    dt.Rows[i][4] = "无";
-                }
-
-                try
-                {
-                    dt.Rows[i][5] = dataZb.SingleOrDefault(S => S.Key.Equals(val)).Value;
-
-                }
-                catch
-                {
-                    dt.Rows[i][5] = "无";
-                }
-                
-            }
-
-
-
-
 
             return dt;
 
         }
 
-        private Dictionary<string, decimal> AllGateIO(ExChangeBase ex)
-        {
-            return ex.GetPrice();
-        }
-
-        private Dictionary<string, decimal> AllZb(ExChangeBase ex)
-        {
-            return ex.GetPrice();
-        }
-
-        private Dictionary<string, decimal> AllOkEx(ExChangeBase ex)
-        {
-            return  ex.GetPrice();
-        }
-
-        private Dictionary<string, decimal> AllHuobi(ExChangeBase ex)
-        {
-            return ex.GetPrice();
-        }
-
-        private Dictionary<string, decimal> AllBiAn(ExChangeBase ex)
-        {
-            return ex.GetPrice();
-        }
-
-      
 
 
 

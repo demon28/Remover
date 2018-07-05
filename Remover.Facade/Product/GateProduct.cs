@@ -64,11 +64,11 @@ namespace Remover.Facade
 
         public override decimal GetSingleNowPrice(CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
-            string Symbol = ConvertSymbolTool.OKConvertSymbol(coin, currency);
+            string Symbol = ConvertSymbolTool.GateConvertSymbol(coin, currency);
 
             var result = gateAPI.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
 
-            if (result.last == 0)
+            if (result.last == 0 || result == null )
             {
                 return 0;
             }

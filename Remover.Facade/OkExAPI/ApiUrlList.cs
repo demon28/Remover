@@ -16,8 +16,8 @@ namespace Remover.Facade.OkExAPI
             /// <summary>
             /// 加参数获取单个币价
             /// </summary>
-        public const string API_Ticker = "/api/v1/tickers.do";
-
+        public const string API_Ticker = "/api/v1/ticker.do";
+        
         /// <summary>
         /// 不加参数为所有币种
         /// </summary>

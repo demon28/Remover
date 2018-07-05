@@ -86,7 +86,7 @@ namespace Remover.Facade
 
             var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
 
-            if (result.ticker.last <= 0)
+            if (result==null)
             {
                 return 0;
             }

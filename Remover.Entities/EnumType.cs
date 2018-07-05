@@ -34,7 +34,8 @@ namespace Remover.Entities
             OKEX=1,
             Gate=2,
             BiAn=3,
-            ZB=4
+            ZB=4,
+            Coineal=5
         }
 
         public enum SymbolType

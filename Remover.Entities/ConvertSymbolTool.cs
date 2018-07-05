@@ -13,7 +13,7 @@ namespace Remover.Entities
 
 
         /// <summary>
-        /// 币安可用 btcusdt, bchbtc, rcneth 
+        /// 币安可用, BTCUSDT 
         /// </summary>
         /// <param name="coin"></param>
         /// <param name="currency"></param>
@@ -54,7 +54,19 @@ namespace Remover.Entities
         /// <returns></returns>
         public static string OKConvertSymbol(CoinType coin, CurrencyType currency)
         {
-            return  (coin.ToString() + "_"+currency.ToString()).ToLower();
+            return "symbol="+(coin.ToString() + "_"+currency.ToString()).ToLower();
+        }
+
+
+        /// <summary>
+        ///  GateIO可用 btc_usdt 
+        /// </summary>
+        /// <param name="coin"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public static string GateConvertSymbol(CoinType coin, CurrencyType currency)
+        {
+            return (coin.ToString() + "_" + currency.ToString()).ToLower();
         }
 
         public static string OKConvertSymbol(string coinName, CurrencyType currency)
