@@ -4,6 +4,8 @@ using Remover.Entities.HBRequestModel;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using Winner.Framework.Utils;
+using static Remover.Entities.EnumType;
 
 namespace Remover.Facade
 {
@@ -28,14 +30,14 @@ namespace Remover.Facade
         }
 
 
-        public override Dictionary<string, decimal> GetAllPrice()
+        protected override Dictionary<string, decimal> GetAllPrice()
         {
             try
             {
                 Dictionary<string, decimal> dic = new Dictionary<string, decimal>();
-
+                Log.Info("START GET HuoBiProduct:" + GetExchangeName());
                 MarketRequestModel list = api.SendRequestContent<MarketRequestModel>(ApiUrlList.API_Market);
-
+                Log.Info("End GET HuoBiProduct:" + GetExchangeName());
                 List<Datum> l = list.data.FindAll(S => S.symbol.Contains("usdt"));
 
                 foreach (var item in l)
@@ -86,7 +88,7 @@ namespace Remover.Facade
         /// <param name="coin"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override decimal GetSingleNowPrice(CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
 
             try
@@ -106,7 +108,21 @@ namespace Remover.Facade
             {
                 return 0;
             }
-           
+        }
+
+        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        {
+            BasePriceModel basePrice = new BasePriceModel();
+            string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
+            var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
+            if(result.status!="ok")
+            {
+                return basePrice;
+            }
+            basePrice.buyPrice = result.tick.bid[0];
+            basePrice.sellPice = result.tick.ask[0];
+            basePrice.price = result.tick.close;
+            return basePrice;
         }
     }
 }

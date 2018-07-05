@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Remover.Entities;
 using Remover.Entities.ZBRequsetModel;
 using Remover.Facade.ZBAPI;
+using Winner.Framework.Utils;
+using static Remover.Entities.EnumType;
 
 namespace Remover.Facade
 {
@@ -19,21 +21,20 @@ namespace Remover.Facade
 
         public ZBProduct(string HuoBiApiAccessKey, string HuoBiApiSeceretKey)
         {
-
             AccessKey = HuoBiApiAccessKey;
             SeceretKey = HuoBiApiSeceretKey;
             api = new ZbAPIFacade(AccessKey, SeceretKey);
         }
 
-        public override Dictionary<string, decimal> GetAllPrice()
+        protected override Dictionary<string, decimal> GetAllPrice()
         {
 
             try
                 {
                 Dictionary<string, decimal> dic = new Dictionary<string, decimal>();
-
+                Log.Info("START GET ZBProduct:" + GetExchangeName());
                 var list = api.SendRequestContent<Dictionary<string, Hpybtc>>(ApiUrlList.API_Market);
-
+                Log.Info("End GET ZBProduct:" + GetExchangeName());
                 var l = list.Where(S => S.Key.Contains("usdt"));
 
                 foreach (var item in l)
@@ -79,7 +80,7 @@ namespace Remover.Facade
         /// <param name="coin"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override decimal GetSingleNowPrice(CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             string Symbol = ConvertSymbolTool.ZBConvertSymbol(coin, currency);
 
@@ -94,6 +95,16 @@ namespace Remover.Facade
 
         }
 
-      
+        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        {
+            BasePriceModel basePrice = new BasePriceModel();
+            string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
+            var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
+            
+            basePrice.buyPrice = result.ticker.buy;
+            basePrice.sellPice = result.ticker.sell;
+            basePrice.price = result.ticker.last;
+            return basePrice;
+        }
     }
 }

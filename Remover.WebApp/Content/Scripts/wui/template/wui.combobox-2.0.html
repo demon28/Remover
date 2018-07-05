@@ -1,0 +1,17 @@
+﻿<div class="wui-combobox">
+    <input role="combobox" class="form-control valid combobox-input" style="padding-right: 20px;" type="text">
+    <a class="combobox-arrow" style="left: 111px;">
+        <i class="glyphicon glyphicon-menu-down"></i>
+    </a>
+    <div class="combobox-body" style="max-height: 700px;">
+        <div class="search">
+            <input name="search-box" class="form-control valid search-box" style="width:100%;" type="text" placeholder="输入进行检索">
+        </div>
+        <div data-bind="foreach:data">
+            <a href="#" data-bind="css:{'action':checkedObservable()==1}, attr:{'data-value':$data[$parent.valueField]},event:{click:$root.click}">
+                <i data-bind="attr:{'class':icoClass},visible:icoClass!=''" class=""></i>
+                <span data-bind="text:$data[$parent.textField]"></span>
+            </a>
+        </div>
+    </div>
+</div>

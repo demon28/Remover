@@ -9,7 +9,7 @@
 * Blog : http://www.cnblogs.com/fineblog/
 * Company ：深圳市乾海盛世移动支付有限公司
 * Copyright (C) Winner研发中心
-* CreateTime : 2018-06-16 10:31:33  
+* CreateTime : 2018-07-02 17:06:42  
 * 
 ***************************************************/
 using System;
@@ -20,9 +20,8 @@ using Winner.Framework.Core;
 using Winner.Framework.Core.DataAccess;
 using Winner.Framework.Core.DataAccess.MySql;
 using Winner.Framework.Utils;
-
-
-namespace Winner.Remover.DataAccess
+using Remover.Entities;
+namespace Remover.DataAccess
 {
     /// <summary>
     /// Data Access Layer Object Of Tr_Cointype

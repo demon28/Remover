@@ -51,46 +51,46 @@ namespace Remover.Facade
         }
 
 
-        public DataTable Enter()
-        {
+        //public DataTable Enter()
+        //{
 
 
-            DataTable dt = new DataTable();
-            dt.Columns.Add("交易所");
+        //    DataTable dt = new DataTable();
+        //    dt.Columns.Add("交易所");
 
 
-            foreach (var item in CoinList)
-            {
-                dt.Columns.Add(item.ToString());
-            }
+        //    foreach (var item in CoinList)
+        //    {
+        //        dt.Columns.Add(item.ToString());
+        //    }
 
-            for (int i = 0; i < ExChanges.Count; i++)
-            {
-                dt.Rows.Add();
-                dt.Rows[i][0] = ExChanges[i].GetExchangeName();
+        //    for (int i = 0; i < ExChanges.Count; i++)
+        //    {
+        //        dt.Rows.Add();
+        //        dt.Rows[i][0] = ExChanges[i].GetExchangeName();
 
-                for (int j = 0; j < CoinList.Count; j++)
-                {
+        //        for (int j = 0; j < CoinList.Count; j++)
+        //        {
 
-                    FuncHandle fh = new FuncHandle(this.AscySingle);
+        //            FuncHandle fh = new FuncHandle(this.AscySingle);
 
-                    IAsyncResult ar = fh.BeginInvoke(ExChanges[i], CoinList[j], null, fh);
-
-
-                    dt.Rows[i][j + 1] = fh.EndInvoke(ar);
-                }
-            }
-
-            return dt;
-        }
+        //            IAsyncResult ar = fh.BeginInvoke(ExChanges[i], CoinList[j], null, fh);
 
 
-        public decimal AscySingle(ExChangeBase ex, CoinType coin)
-        {
+        //            dt.Rows[i][j + 1] = fh.EndInvoke(ar);
+        //        }
+        //    }
 
-         return  ex.GetSingleNowPrice(coin);
+        //    return dt;
+        //}
 
-        }
+
+        //public decimal AscySingle(ExChangeBase ex, CoinType coin)
+        //{
+
+        //    return ex.GetSingleNowPrice(coin);
+
+        //}
 
         /// <summary>
         /// 获取所有币种所有价格组成DataTable
@@ -205,27 +205,27 @@ namespace Remover.Facade
 
         private Dictionary<string, decimal> AllGateIO(ExChangeBase ex)
         {
-            return ex.GetAllPrice();
+            return ex.GetPrice();
         }
 
         private Dictionary<string, decimal> AllZb(ExChangeBase ex)
         {
-            return ex.GetAllPrice();
+            return ex.GetPrice();
         }
 
         private Dictionary<string, decimal> AllOkEx(ExChangeBase ex)
         {
-            return  ex.GetAllPrice();
+            return  ex.GetPrice();
         }
 
         private Dictionary<string, decimal> AllHuobi(ExChangeBase ex)
         {
-            return ex.GetAllPrice();
+            return ex.GetPrice();
         }
 
         private Dictionary<string, decimal> AllBiAn(ExChangeBase ex)
         {
-            return ex.GetAllPrice();
+            return ex.GetPrice();
         }
 
       

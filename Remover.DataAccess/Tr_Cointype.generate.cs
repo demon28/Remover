@@ -20,7 +20,9 @@ using Winner.Framework.Core;
 using Winner.Framework.Core.DataAccess;
 using Winner.Framework.Core.DataAccess.MySql;
 using Winner.Framework.Utils;
-namespace Winner.Remover.DataAccess
+using static Remover.Entities.EnumType;
+
+namespace Remover.DataAccess
 {
     /// <summary>
     /// Data Access Layer Object Of Tr_Cointype
@@ -37,7 +39,14 @@ namespace Winner.Remover.DataAccess
     /// </summary>
     public partial class Tr_CointypeCollection : DataAccessCollectionBase
     {
-   
+
         //提示：此类由代码生成器生成，如无特殊情况请不要更改。如要扩展请在外部同名类中扩展
+        public bool ListBuyStatus()
+        {
+            string sql = " STATUS=?STATUS";
+            AddParameter("STATUS", (int)CoinStatus.展示);
+            return ListByCondition(sql);
+        }
+
     }
 } 

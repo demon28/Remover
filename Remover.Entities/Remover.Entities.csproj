@@ -59,6 +59,9 @@
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
     <Compile Include="BaseModel.cs" />
+    <Compile Include="BasePriceModel.cs" />
+    <Compile Include="BiAnRequestModel\BookTickerResult.cs" />
+    <Compile Include="BiAnRequestModel\PriceRequest.cs" />
     <Compile Include="BiAnRequestModel\TicketRequest.cs" />
     <Compile Include="ConvertSymbolTool.cs" />
     <Compile Include="DBTickertModel.cs" />

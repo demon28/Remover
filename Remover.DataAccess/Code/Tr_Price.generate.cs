@@ -21,8 +21,7 @@ using Winner.Framework.Core.DataAccess;
 using Winner.Framework.Core.DataAccess.MySql;
 using Winner.Framework.Utils;
 
-
-namespace Winner.Remover.DataAccess
+namespace Remover.DataAccess
 {
     /// <summary>
     /// Data Access Layer Object Of Tr_Price
