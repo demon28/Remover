@@ -39,8 +39,7 @@ namespace Remover.Facade.GateAPI
             var url = $"{HUOBI_HOST_URL}{resourcePath}{parameters}";
         
             var request = new RestRequest(url, Method.GET);
-
-           var result= client.Execute(request);
+            var result= client.Execute(request);
          
               
             if (result.Content == null || result.Content == string.Empty)

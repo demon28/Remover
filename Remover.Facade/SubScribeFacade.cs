@@ -106,7 +106,7 @@ namespace Remover.Facade
 
                 var item = exChangesList.ElementAt(i);
 
-                Dictionary<string, decimal> data =item.Value.GetAllPrice();
+                Dictionary<string, decimal> data =item.Value.GetPrice();
 
                 dt.Columns.Add(item.Value.GetExchangeName());
 

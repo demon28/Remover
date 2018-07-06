@@ -44,9 +44,19 @@ namespace Remover.Entities
             ltcusdt=1,
             ethusdt=2,
             eosusdt=3
-
         }
 
-     
+        public enum PlatformStatus
+        {
+            禁用=0,
+            展示=1
+        }
+
+        public enum CoinStatus
+        {
+            禁用 = 0,
+            展示 = 1
+        }
+
     }
 }

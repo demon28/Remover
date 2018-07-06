@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Remover.Entities;
 using Remover.Entities.OKRequestModel;
 using Remover.Facade.OkExAPI;
+using Winner.Framework.Utils;
+using static Remover.Entities.EnumType;
+
 namespace Remover.Facade
 {
     public class OkExProduct : ExChangeBase
@@ -25,14 +28,15 @@ namespace Remover.Facade
         }
 
 
-        public override Dictionary<string, decimal> GetAllPrice()
+        protected override Dictionary<string, decimal> GetAllPrice()
         {
 
             try
             {
                 Dictionary<string, decimal> dic = new Dictionary<string, decimal>();
+                Log.Info("START GET ExChangeBase:" + GetExchangeName());
                 MarketRequestModel list = OkAPi.SendRequestContent< MarketRequestModel> (ApiUrlList.API_Market);
-
+                Log.Info("End GET ExChangeBase:" + GetExchangeName());
                 List<Ticker> l = list.tickers.FindAll(S => S.symbol.Contains("usdt"));
 
                 foreach (var item in l)
@@ -55,7 +59,7 @@ namespace Remover.Facade
         {
             return "OkEx";
         }
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override decimal GetSingleNowPrice(CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             string symbol = ConvertSymbolTool.OKConvertSymbol(coin, currency);
 
@@ -68,6 +72,22 @@ namespace Remover.Facade
             }
 
             return ticket.ticker.last;
+        }
+
+        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        {
+            BasePriceModel basePrice = new BasePriceModel();
+            string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
+            var result = OkAPi.SendRequestContent<TicketRequset>(ApiUrlList.API_Ticker, Symbol);
+
+            if (result == null)
+            {
+                return basePrice;
+            }
+            basePrice.buyPrice = result.ticker.buy;
+            basePrice.sellPice = result.ticker.sell;
+            basePrice.price = result.ticker.last;
+            return basePrice;
         }
     }
 }

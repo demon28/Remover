@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,10 +53,19 @@
     <Reference Include="Javirs.Common, Version=2.6.21.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Javirs.Common.2.6.21\lib\net40\Javirs.Common.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\winner.log.1.0.0\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data">
+      <HintPath>D:\Documents\桌面\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
     </Reference>
@@ -70,17 +80,15 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -121,6 +129,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -129,17 +138,17 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Winner.Framework.Core, Version=1.2.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\winner.core.1.2.1\lib\Winner.Framework.Core.dll</HintPath>
+    <Reference Include="Winner.Framework.Core, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\winner.core.1.3.0\lib\net40\Winner.Framework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Winner.Framework.Encrypt, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\winner.core.1.2.1\lib\Winner.Framework.Encrypt.dll</HintPath>
+    <Reference Include="Winner.Framework.Encrypt, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\winner.core.1.3.0\lib\net40\Winner.Framework.Encrypt.dll</HintPath>
     </Reference>
     <Reference Include="Winner.Framework.MVC, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Winner.Framework.MVC.2.0.7\lib\net40\Winner.Framework.MVC.dll</HintPath>
     </Reference>
-    <Reference Include="Winner.Framework.Utils, Version=1.1.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\winner.core.1.2.1\lib\Winner.Framework.Utils.dll</HintPath>
+    <Reference Include="Winner.Framework.Utils, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\winner.core.1.3.0\lib\net40\Winner.Framework.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Winner.Mvc.Audit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Winner.Mvc.Audit.1.0.0\lib\Winner.Mvc.Audit.dll</HintPath>
@@ -147,11 +156,14 @@
     <Reference Include="Winner.Platform.MVC, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Winner.Platform.MVC.1.1.1\lib\net40\Winner.Platform.MVC.dll</HintPath>
     </Reference>
+    <Reference Include="Winner.User.Interface, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Winner.User.Interface.1.0.8\lib\net40\Winner.User.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Winner.User.Provider, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Winner.User.Provider.1.0.8\lib\net46\Winner.User.Provider.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ApplicationInsights">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
@@ -178,15 +190,109 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CoinPriceVModel.cs" />
+    <Compile Include="Models\Mvc\AdminWebViewPage.cs" />
+    <Compile Include="Models\Mvc\DefaultActionAttribute.cs" />
+    <Compile Include="Models\Mvc\WorkContext.cs" />
+    <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\avatars\user.jpg" />
+    <Content Include="Content\assets\css\ace-fonts.css" />
+    <Content Include="Content\assets\css\ace-ie.css" />
+    <Content Include="Content\assets\css\ace-part2.css" />
+    <Content Include="Content\assets\css\ace-rtl.css" />
+    <Content Include="Content\assets\css\ace-skins.css" />
+    <Content Include="Content\assets\css\ace.css" />
+    <Content Include="Content\assets\css\ace.onpage-help.css" />
+    <Content Include="Content\assets\css\bootstrap.css" />
+    <Content Include="Content\assets\css\pace.css" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\assets\js\ace-elements.js" />
+    <Content Include="Content\assets\js\ace-extra.js" />
+    <Content Include="Content\assets\js\ace-require.js" />
+    <Content Include="Content\assets\js\ace-small.js" />
+    <Content Include="Content\assets\js\ace.js" />
+    <Content Include="Content\assets\js\src\ace.ajax-content.js" />
+    <Content Include="Content\assets\js\src\ace.auto-container.js" />
+    <Content Include="Content\assets\js\src\ace.auto-padding.js" />
+    <Content Include="Content\assets\js\src\ace.basics.js" />
+    <Content Include="Content\assets\js\src\ace.js" />
+    <Content Include="Content\assets\js\src\ace.onpage-help.js" />
+    <Content Include="Content\assets\js\src\ace.scrolltop.js" />
+    <Content Include="Content\assets\js\src\ace.searchbox-autocomplete.js" />
+    <Content Include="Content\assets\js\src\ace.settings-rtl.js" />
+    <Content Include="Content\assets\js\src\ace.settings-skin.js" />
+    <Content Include="Content\assets\js\src\ace.settings.js" />
+    <Content Include="Content\assets\js\src\ace.sidebar-scroll-1.js" />
+    <Content Include="Content\assets\js\src\ace.sidebar-scroll-2.js" />
+    <Content Include="Content\assets\js\src\ace.sidebar.js" />
+    <Content Include="Content\assets\js\src\ace.submenu-hover.js" />
+    <Content Include="Content\assets\js\src\ace.touch-drag.js" />
+    <Content Include="Content\assets\js\src\ace.widget-box.js" />
+    <Content Include="Content\assets\js\src\ace.widget-on-reload.js" />
+    <Content Include="Content\assets\js\src\elements.aside.js" />
+    <Content Include="Content\assets\js\src\elements.colorpicker.js" />
+    <Content Include="Content\assets\js\src\elements.fileinput.js" />
+    <Content Include="Content\assets\js\src\elements.onpage-help.js" />
+    <Content Include="Content\assets\js\src\elements.scroller.js" />
+    <Content Include="Content\assets\js\src\elements.spinner.js" />
+    <Content Include="Content\assets\js\src\elements.treeview.js" />
+    <Content Include="Content\assets\js\src\elements.typeahead.js" />
+    <Content Include="Content\assets\js\src\elements.wizard.js" />
+    <Content Include="Content\assets\js\src\elements.wysiwyg.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\components\bootbox.js\bootbox.js" />
+    <Content Include="Content\components\bootbox.js\bootbox.min.js" />
+    <Content Include="Content\components\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Content\components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.flash.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.html5.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.print.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Content\components\datatables.net-select\js\dataTables.select.js" />
+    <Content Include="Content\components\datatables.net-select\js\dataTables.select.min.js" />
+    <Content Include="Content\components\datatables\media\js\jquery.dataTables.js" />
+    <Content Include="Content\components\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\components\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\components\jquery\dist\jquery.js" />
+    <Content Include="Content\components\_mod\datatables\jquery.dataTables.bootstrap.js" />
+    <Content Include="Content\components\_mod\datatables\jquery.dataTables.bootstrap.min.js" />
+    <Content Include="Content\Scripts\bootbox.min.js" />
+    <Content Include="Content\Scripts\bootstrap.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.messages_cn.js" />
+    <Content Include="Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\jQuery.validator.extend.js" />
+    <Content Include="Content\Scripts\jquery.winner.plugins.js" />
+    <Content Include="Content\Scripts\knockout-2.2.0.js" />
+    <Content Include="Content\Scripts\ko-pager.js" />
+    <Content Include="Content\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Content\Scripts\shear\hammer.min.js" />
+    <Content Include="Content\Scripts\shear\iscroll-zoom.min.js" />
+    <Content Include="Content\Scripts\shear\photoClip.min.js" />
+    <Content Include="Content\Scripts\upload.js" />
+    <Content Include="Content\Scripts\wui\template\wui.alert.html" />
+    <Content Include="Content\Scripts\wui\template\wui.combobox-2.0.html" />
+    <Content Include="Content\Scripts\wui\template\wui.combobox.html" />
+    <Content Include="Content\Scripts\wui\template\wui.flyout.iframe.html" />
+    <Content Include="Content\Scripts\wui\template\wui.win.html" />
+    <Content Include="Content\Scripts\wui\wui.min.js" />
+    <Content Include="Content\winner\winner.bootstrap.changePage.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -196,6 +302,23 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\assets\fonts\OpenSans-300.woff" />
+    <Content Include="Content\assets\fonts\OpenSans-400.woff" />
+    <Content Include="Content\assets\fonts\readme" />
+    <Content Include="Content\assets\js\src\readme" />
+    <Content Include="Content\assets\js\src\scripts.json" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
+    <Content Include="log4net.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -219,10 +342,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -236,6 +360,20 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Remover.DataAccess\Remover.DataAccess.csproj">
+      <Project>{850a3134-73d0-457f-9c98-bfc258b9ad52}</Project>
+      <Name>Remover.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Remover.Entities\Remover.Entities.csproj">
+      <Project>{137e1157-be75-435b-87c6-b0593db1561c}</Project>
+      <Name>Remover.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Remover.Facade\Remover.Facade.csproj">
+      <Project>{79bc171f-3a4d-491b-b318-ef50b403a373}</Project>
+      <Name>Remover.Facade</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

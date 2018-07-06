@@ -48,6 +48,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>D:\Documents\桌面\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,14 +72,25 @@
   <ItemGroup>
     <Compile Include="Code\Tr_Cointype.generate.cs" />
     <Compile Include="Code\Tr_Exchange.generate.cs" />
+    <Compile Include="Code\Tr_Platform.generate.cs" />
     <Compile Include="Code\Tr_Price.generate.cs" />
+    <Compile Include="Code\Tr_Quotes.generate.cs" />
+    <Compile Include="Code\Tsys_Winservice.generate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tr_Cointype.generate.cs" />
     <Compile Include="Tr_Exchange.generate.cs" />
+    <Compile Include="Tr_Platform.generate.cs" />
     <Compile Include="Tr_Price.generate.cs" />
+    <Compile Include="Tr_Quotes.generate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Remover.Entities\Remover.Entities.csproj">
+      <Project>{137E1157-BE75-435B-87C6-B0593DB1561C}</Project>
+      <Name>Remover.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

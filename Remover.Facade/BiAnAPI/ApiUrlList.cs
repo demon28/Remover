@@ -10,8 +10,7 @@ namespace Remover.Facade.BiAnAPI
     {
 
         //https://api.binance.com/api/v1/ticker/24hr
-
-
+        
         /// <summary>
         /// 加参数为获取该币种价格
         /// </summary>
@@ -24,7 +23,14 @@ namespace Remover.Facade.BiAnAPI
         public const string API_Market = "/api/v1/ticker/24hr";
 
 
+        /// <summary>
+        /// 订单中的最佳价格/数量
+        /// </summary>
+        //public const string API_BookTicket = "/api/v3/ticker/bookTicker";
 
-
+        /// <summary>
+        /// 币的最新价格
+        /// </summary>
+        //public const string API_Price = "/api/v3/ticker/price";
     }
 }

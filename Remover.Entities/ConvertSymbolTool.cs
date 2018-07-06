@@ -23,6 +23,11 @@ namespace Remover.Entities
             return "&symbol=" + (coin.ToString() + currency.ToString()).ToUpper();
         }
 
+        public static string BiAnConvertSymbol(string coinName,CurrencyType currency)
+        {
+            return "&symbol=" + (coinName + currency.ToString()).ToUpper();
+        }
+
 
 
         /// <summary>
@@ -36,7 +41,10 @@ namespace Remover.Entities
             return "&symbol=" + (coin.ToString() + currency.ToString()).ToLower();
         }
 
-
+        public static string HBConvertSymbol(string coinName, CurrencyType currency)
+        {
+            return "&symbol=" + (coinName + currency.ToString()).ToLower();
+        }
 
         /// <summary>
         ///  OKEx可用,GateIO可用 btc_usdt 
@@ -61,6 +69,10 @@ namespace Remover.Entities
             return (coin.ToString() + "_" + currency.ToString()).ToLower();
         }
 
+        public static string OKConvertSymbol(string coinName, CurrencyType currency)
+        {
+            return (coinName + "_" + currency.ToString()).ToLower();
+        }
 
         /// <summary>
         ///  OKEx可用,GateIO可用 btc_usdt 
@@ -73,5 +85,9 @@ namespace Remover.Entities
             return "market="+(coin.ToString() + "_" + currency.ToString()).ToLower();
         }
 
+        public static string ZBConvertSymbol(string coinNam, CurrencyType currency)
+        {
+            return "market=" + (coinNam + "_" + currency.ToString()).ToLower();
+        }
     }
 }

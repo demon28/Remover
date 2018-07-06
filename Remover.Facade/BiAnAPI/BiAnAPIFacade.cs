@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Winner.Framework.Core.Facade;
+using Winner.Framework.Utils;
 
 namespace Remover.Facade.BiAnAPI
 {
-   public class BiAnAPIFacade:FacadeBase
+    public class BiAnAPIFacade : FacadeBase
     {
 
         public string HUOBI_HOST_URL, ApiKey, SecereKey;
@@ -21,8 +22,10 @@ namespace Remover.Facade.BiAnAPI
             HUOBI_HOST_URL = url;
             ApiKey = apikey;
             SecereKey = secerekey;
+            //System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Ssl3;
             client = new RestClient();
             client = new RestClient(HUOBI_HOST_URL);
+
             client.AddDefaultHeader("Content-Type", "application/json");
             client.AddDefaultHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
         }
@@ -37,17 +40,27 @@ namespace Remover.Facade.BiAnAPI
         public T SendRequestContent<T>(string resourcePath, string parameters = "") where T : new()
         {
 
-            var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
-     
-            var request = new RestRequest(url, Method.GET);
-            var result = client.Execute(request);
-            if (result.Content == null || result.Content == string.Empty)
+            try
             {
-                Alert(result.ErrorMessage);
+                var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
+
+                var request = new RestRequest(url, Method.GET);
+                var result = client.Execute(request);
+                Log.Debug($"statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content}");
+                if (result.Content == null || result.Content == string.Empty)
+                {
+                    Alert(result.ErrorMessage);
+                    return default(T);
+                }
+
+                return JsonConvert.DeserializeObject<T>(result.Content);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                Alert(ex.Message);
                 return default(T);
             }
-
-            return JsonConvert.DeserializeObject<T>(result.Content);
 
 
         }

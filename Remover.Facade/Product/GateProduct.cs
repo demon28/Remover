@@ -8,6 +8,8 @@ using Remover.Facade.GateAPI;
 using Winner.Framework.Core.Facade;
 using Remover.Entities.GateRequestModel;
 using System.Collections;
+using Winner.Framework.Utils;
+using static Remover.Entities.EnumType;
 
 namespace Remover.Facade
 {
@@ -26,7 +28,7 @@ namespace Remover.Facade
             gateAPI = new GateAPIFacade(Apikey, Seceretkey);
         }
 
-        public override Dictionary<string, decimal> GetAllPrice()
+        protected override Dictionary<string, decimal> GetAllPrice()
         {
 
 
@@ -34,9 +36,9 @@ namespace Remover.Facade
             {
 
                 Dictionary<string, decimal> dic = new Dictionary<string, decimal>();
-
+                Log.Info("START GET GateProduct:" + GetExchangeName());
                 var list = gateAPI.SendRequestContent<Dictionary<string, Btc_Usdt>>(ApiUrlList.API_Market);
-
+                Log.Info("End GET GateProduct:" + GetExchangeName());
                 var l = list.Where(S => S.Key.Contains("usdt"));
 
                 foreach (var item in l)
@@ -60,7 +62,7 @@ namespace Remover.Facade
             return "GateIO";
         }
 
-        public override decimal GetSingleNowPrice(EnumType.CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override decimal GetSingleNowPrice(CoinType coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             string Symbol = ConvertSymbolTool.GateConvertSymbol(coin, currency);
 
@@ -72,6 +74,17 @@ namespace Remover.Facade
             }
 
             return result.last;
+        }
+
+        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        {
+            BasePriceModel basePrice = new BasePriceModel();
+            string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
+            var result = gateAPI.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
+            basePrice.buyPrice = result.highestBid;
+            basePrice.sellPice = result.lowestAsk;
+            basePrice.price = result.last;
+            return basePrice;
         }
     }
 }

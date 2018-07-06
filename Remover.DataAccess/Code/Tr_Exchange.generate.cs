@@ -23,7 +23,7 @@ using Winner.Framework.Utils;
 
 
 
-namespace Winner.Remover.DataAccess
+namespace Remover.DataAccess
 {
     /// <summary>
     /// Data Access Layer Object Of Tr_Exchange

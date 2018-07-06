@@ -2,3 +2,90 @@
     ViewBag.Title = "Home Page";
 }
 
+@section breadcrumb{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="/Home">首页</a>
+            </li>
+            <li>
+                <a href="/Home">首页</a>
+            </li>
+            <li class="active">交易信息</li>
+        </ul>
+    </div>
+}
+
+<div class="page-header">
+    <h1>
+        首页
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            交易信息
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12" id="view-currency">
+        <table id="His-Table" class="table table-striped table-bordered table-hover">
+            <thead id="table_thead">
+                <tr></tr>
+            </thead>
+            <tbody id="table_tbody"></tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+    var _url_index ="@Url.Content("/Home/ListCurrency")";
+
+    jQuery(function ($) {
+        initView();
+        //setInterval(initView, 1000);
+    });
+
+    function initView() {
+        $.ajax({
+            type: "POST",
+            url: _url_index,
+            data: "",
+            success: function (result) {
+                if (result.Success) {
+                    InsertData(result.Content);
+                }
+            }
+        });
+        }
+        function InsertData(content) {
+            $("#table_thead").children().html("");
+            $("#table_tbody").html("");
+            $.each(content.TitleVModels, function (i, ex) {
+                $("#table_thead").children().append("<th>" + ex.TitleName + "</th>");
+            });
+
+            $.each(content.CoinInfoVModels, function (f, e) {
+                $("#table_tbody").append("<tr><td>" + e.CoinName + "</td></tr>");
+                //console.log(e.Difference);
+                $.each(e.PriceVModels, function (k, j) {
+                    if (e.CoinName == j.CoinName) {
+                        var tbody = $("#table_tbody").children().eq(f);
+                        var pu = $("<td></td>").text(j.Price);
+                        if (j.IsMaxAndMin == 1) {
+                            tbody.append("<td><div class='badge badge-success'>" + j.Price + "<i class='ace-icon fa fa-arrow-up'></i></div></td>");
+                        }
+                        else if (j.IsMaxAndMin == 2) {
+                            tbody.append("<td><div class='badge badge-danger'>" + j.Price + "<i class='ace-icon fa fa-arrow-down'></i></div></td>");
+                        }
+                        else {
+                            tbody.append(pu);
+                        }
+                    }
+                });
+                $("#table_tbody").children().eq(f).append("<td>" + e.Difference + "</td>");
+            });
+        }
+    </script>
+}
