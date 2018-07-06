@@ -26,7 +26,7 @@ namespace Remover.Facade.Product
             coinealAPI = new CoinealAPIFacade(Apikey, Seceretkey);
         }
 
-        public override Dictionary<string, decimal> GetAllPrice()
+        protected override Dictionary<string, decimal> GetAllPrice()
         {
 
             try { 
@@ -83,6 +83,11 @@ namespace Remover.Facade.Product
             }
 
             return result.data.buy;
+        }
+
+        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        {
+            return new BasePriceModel();
         }
     }
 }
