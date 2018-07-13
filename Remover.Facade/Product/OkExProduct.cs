@@ -77,11 +77,12 @@ namespace Remover.Facade
         public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             BasePriceModel basePrice = new BasePriceModel();
-            string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
+            string Symbol = ConvertSymbolTool.OKConvertSymbol(coin, currency);
             var result = OkAPi.SendRequestContent<TicketRequset>(ApiUrlList.API_Ticker, Symbol);
 
             if (result == null)
             {
+                Log.Error("okex数据为空" + coin);
                 return basePrice;
             }
             basePrice.buyPrice = result.ticker.buy;

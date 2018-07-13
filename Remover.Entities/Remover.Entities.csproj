@@ -85,6 +85,7 @@
     <Compile Include="CoinealRequestModel\TicketRequest.cs" />
     <Compile Include="ConvertSymbolTool.cs" />
     <Compile Include="DBTickertModel.cs" />
+    <Compile Include="Encrypt\MultipleEncrypt.cs" />
     <Compile Include="EnumType.cs" />
     <Compile Include="GateRequestModel\MarketRequestModel.cs" />
     <Compile Include="GateRequestModel\TicketRequest.cs" />

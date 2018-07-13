@@ -4,84 +4,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section breadcrumb{
-    <div class="breadcrumbs" id="breadcrumbs">
-        <ul class="breadcrumb">
-            <li>
-                <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="/Home">首页</a>
-            </li>
-            <li>
-                <a href="/Currency">货币管理</a>
-            </li>
-            <li class="active">货币列表</li>
-        </ul>
-    </div>
-}
 
 @section header{
     <style>
-
+        .col-lg-3 { flex: 0 0 25%; max-width: 25%; padding-right: 15px; padding-left: 15px; }
+        .card-header.card-header-primary { margin: -1px -1px 0; background: #20a8d8; border-bottom: 1px solid #20a8d8; }
+        .card-header.card-header-inverse { color: #fff; }
+        .card-header { padding: 0.75rem 1.25rem; margin-bottom: 0; background-color: #eceff1; border-bottom: 1px solid #cfd8dc; }
+        .card { position: relative; display: flex; flex-direction: column; background-color: #fff; border: 1px solid #cfd8dc; }
+        .card { margin-bottom: 1.5rem; }
     </style>
     }
 
-<div class="page-header">
-    <h1>
-        货币管理
-        <small>
-            <i class="ace-icon fa fa-angle-double-right"></i>
-            货币列表
-        </small>
-    </h1>
-</div>
-
 <div class="row">
-    <div class="col-xs-12" id="view-currency">
-        <div id="His-Table" class="table table-striped table-bordered table-hover">
-            <ul data-bind="foreach: people">
-                <li>货币名称</li>
-                <li>BIAN</li>
-                <li>GATE</li>
-                <li>OKEX</li>
-                <li>HUOBI</li>
-                <li>ETC</li>
-            </ul>
-            <ul>
-                <li>ETC</li>
-                <li>10.7778</li>
-                <li>21.856</li>
-                <li>78.9</li>
-                <li>4578</li>
-                <li>45.87</li>
-            </ul>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card">
+            <div class="card-header card-header-inverse card-header-success">
+                <div class="font-weight-bold">
+                    <span>SALE</span>
+                    <span class="float-right">$1.890,65</span>
+                </div>
+                <div>
+                    <span>
+                        <small>Today 6:43 AM</small>
+                    </span>
+                    <span class="float-right">
+                        <small>+432,50 (15,78%)</small>
+                    </span>
+                </div>
+                <div class="chart-wrapper" style="height:38px;">
+                    <canvas class="chart-7-3 chart chart-line" height="38"></canvas>
+                </div>
+                <div class="chart-wrapper" style="height:38px;">
+                    <canvas class="chart-8-3 chart chart-bar" height="38"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 @section scripts{
     <script type="text/javascript">
-    var _url_index ="@Url.Content("/Currency/ListCurrency")";
-
-    jQuery(function ($) {
-        setInterval(initView, 1000);
-    });
-
-    function initView() {
-        $.ajax({
-            type: "POST",
-            url: _url_index,
-            data: "",
-            success: function (result) {
-                KOView.Currency(result.Content);
-            }
-        });
-    }
-
-    function KOViewModel(data) {
-        var self = this;
-        self.Currency = ko.observableArray(data);
-    }
-    var KOView=new KOViewModel([]);
-    ko.applyBindings(KOView, document.getElementById("view-currency"));
+    
 
     </script>
 }

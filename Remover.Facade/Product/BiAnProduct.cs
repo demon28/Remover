@@ -90,6 +90,12 @@ namespace Remover.Facade
             BasePriceModel basePrice = new BasePriceModel();
             string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
             var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
+            if(result==null)
+            {
+                Log.Error("币安数据为空"+ coin);
+                return basePrice;
+            }
+
             basePrice.buyPrice = result.bidPrice;
             basePrice.sellPice = result.askPrice;
             basePrice.price = result.lastPrice;

@@ -11,9 +11,8 @@ namespace Remover.Entities.OKRequestModel
         /// <summary>
         /// 返回数据时服务器时间
         /// </summary>
-       public string date;
+        public string date;
         public TickerModel ticker;
-
 
     }
 

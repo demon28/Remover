@@ -21,8 +21,10 @@ namespace Remover.WebApp.Controllers
         public ActionResult ListCurrency()
         {
             Tr_QuotesCollection quotesCollection = new Tr_QuotesCollection();
+            Log.Info("---------调用查询开始-----------");
             quotesCollection.ListByCurrents();
-            if(quotesCollection.Count==0)
+            Log.Info("---------调用查询结束-----------");
+            if (quotesCollection.Count==0)
             {
                 SuccessResult(quotesCollection);
             }
@@ -50,10 +52,9 @@ namespace Remover.WebApp.Controllers
                     group d by d.CoinName into g
                     select new
                     {
-                        MaxPrice = g.Max(x => x.Price),
-                        MinPrice = g.Min(t => t.Price),
-                        coinName = g.Key,
-                        quotesId = g.FirstOrDefault().QuotesId
+                        MaxPrice = g.Max(x => x.SellPrice),
+                        MinPrice = g.Min(t => t.BuyPrice),
+                        coinName = g.Key
                     };
 
             //包装当前价格
@@ -71,14 +72,15 @@ namespace Remover.WebApp.Controllers
                         PriceVModel price = new PriceVModel();
                         price.BuyPrice = model.BuyPrice;
                         price.CoinName = model.CoinName;
+                        price.SellPrice = model.SellPrice;
                         price.PlatformName = model.PlatformName;
                         price.Price = model.Price;
                         int isMaxAndMin = 0;
-                        if(item.MaxPrice==model.Price)
+                        if(item.MaxPrice==model.SellPrice)
                         {
                             isMaxAndMin = 1;
                         }
-                        if (item.MinPrice == model.Price)
+                        if (item.MinPrice == model.BuyPrice)
                         {
                             isMaxAndMin = 2;
                         }
@@ -93,7 +95,6 @@ namespace Remover.WebApp.Controllers
             CoinPriceVModel tableModel = new CoinPriceVModel();
             tableModel.CoinInfoVModels = ListCoinInfo;
             tableModel.TitleVModels = titleList;
-            
             return SuccessResult(tableModel);
         }
     }

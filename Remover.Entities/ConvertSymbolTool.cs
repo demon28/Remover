@@ -57,6 +57,11 @@ namespace Remover.Entities
             return "symbol="+(coin.ToString() + "_"+currency.ToString()).ToLower();
         }
 
+        public static string OKConvertSymbol(string coinName, CurrencyType currency)
+        {
+            return "symbol=" + (coinName + "_" + currency.ToString()).ToLower();
+        }
+
 
         /// <summary>
         ///  GateIO可用 btc_usdt 
@@ -69,7 +74,7 @@ namespace Remover.Entities
             return (coin.ToString() + "_" + currency.ToString()).ToLower();
         }
 
-        public static string OKConvertSymbol(string coinName, CurrencyType currency)
+        public static string GateConvertSymbol(string coinName, CurrencyType currency)
         {
             return (coinName + "_" + currency.ToString()).ToLower();
         }

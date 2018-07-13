@@ -46,46 +46,20 @@ namespace Remover.Facade.Service
                     {
                         tasks.Add(Task.Factory.StartNew(() =>
                         {
-                            TaskExecution(item.PlatformId, coin.Cid, item.PlatformCode, coin.CoinCode);
+                            AddQuotes jobServcie = new AddQuotes();
+                            jobServcie.TaskExecution(item.PlatformId, coin.Cid, item.PlatformCode, coin.CoinCode);
                         }));
                     }
                 }
-
                 Task.WaitAll(tasks.ToArray());
-
-                Log.Info("-----------------结束执行RunGetCoinPrice-------------------");
             }
             catch (Exception ex)
             {
                 Log.Error("执行失败", ex);
                 throw;
             }
-
+            Log.Info("-----------------结束执行RunGetCoinPrice-------------------");
             return true;
-        }
-
-        static void TaskExecution(int platformId,int coinId, string platformCode, string coinCode)
-        {
-            Log.Info("执行TaskExecution");
-            ExchangeType eType = (ExchangeType)Enum.Parse(typeof(ExchangeType), platformCode);
-            ExChangeBase eb = ExchangeFactory.InstanExchange(eType);
-            BasePriceModel priceModel = eb.GetNowPrice(coinCode, CurrencyType.USDT);
-            Tr_Quotes quotes = new Tr_Quotes();
-            quotes.CoinName = coinCode;
-            quotes.Market = platformCode + "_" + coinCode;
-            quotes.Price = priceModel.price;
-            quotes.Buyprice = priceModel.buyPrice;
-            quotes.Sellprice = priceModel.sellPice;
-            quotes.PlatformId = platformId;
-            quotes.CoinId = coinId;
-            quotes.Timestamps = DateTime.UtcNow.ToString();
-            quotes.Currencytype = (int)CurrencyType.USDT;
-            quotes.CreateTime = DateTime.Now ;
-            if(!quotes.Insert())
-            {
-                Log.Error("新增数据失败");
-            }
-            Log.Info("完成执行TaskExecution");
         }
         
         public JobResult Run(DateTime runTime)

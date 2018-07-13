@@ -10,8 +10,6 @@ namespace Remover.WebApp.Models
         public List<TitleVModel> TitleVModels { get; set; }
 
         public List<CoinInfoVModel> CoinInfoVModels { get; set; }
-
-        public List<CoinComparedVModel> CoinComparedVModels { get; set; }
     }
 
     public class TitleVModel
@@ -65,24 +63,5 @@ namespace Remover.WebApp.Models
         /// </summary>
         public int IsMaxAndMin { get; set; }
     }
-
-    public class CoinComparedVModel
-    {
-        /// <summary>
-        /// 币名
-        /// </summary>
-        public string CoinName { get; set; }
-        /// <summary>
-        /// 最高价
-        /// </summary>
-        public decimal MaxPrice { get; set; }
-        /// <summary>
-        /// 最低价
-        /// </summary>
-        public decimal MinPrice { get; set; }
-        /// <summary>
-        /// 差值
-        /// </summary>
-        public decimal Difference { get; set; }
-    }
+    
 }

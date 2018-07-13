@@ -113,10 +113,15 @@ namespace Remover.Facade
         public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
         {
             BasePriceModel basePrice = new BasePriceModel();
-            string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
+            string Symbol = ConvertSymbolTool.HBConvertSymbol(coin, currency);
             var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
             if(result.status!="ok")
             {
+                return basePrice;
+            }
+            if (result.tick == null)
+            {
+                Log.Error("HUOBI数据为空" + coin);
                 return basePrice;
             }
             basePrice.buyPrice = result.tick.bid[0];

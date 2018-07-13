@@ -20,16 +20,13 @@ namespace Remover.DataAccess
         /// <returns></returns>
         public bool ListByCurrents()
         {
-            string sql = @"SELECT * FROM
-	(SELECT	tq.*,tp.platform_name FROM
-	    tr_quotes tq join tr_platform tp on tp.platform_id=tq.platform_id
-	    ORDER BY
-	    tq.create_time DESC
-	) tt
-    GROUP BY
-	tt.market
-    ORDER BY
-	tt.platform_id DESC,tt.coin_id desc";
+            string sql = @"select a.*,tr.platform_name from tr_quotes as a right join
+(
+select max(quotes_id) as max_score from tr_quotes group by market order by quotes_id desc LIMIT 1000
+) as b on b.max_score=a.quotes_id
+RIGHT JOIN  tr_platform tr on a.platform_id=tr.platform_id 
+ORDER BY
+	a.platform_id DESC,a.coin_id DESC";
             return ListBySql(sql);
 
         }

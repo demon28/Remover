@@ -12,7 +12,7 @@ namespace Remover.WebApp.Models
         public int PlatformId { get; set; }
         public string CoinName { get; set; }
         public string Market { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public decimal BuyPrice { get; set; }
         public decimal SellPrice { get; set; }
         public int CurrencyType { get; set; }

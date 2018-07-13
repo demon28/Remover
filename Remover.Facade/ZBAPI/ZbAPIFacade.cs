@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Winner.Framework.Core.Facade;
+using Winner.Framework.Utils;
 
 namespace Remover.Facade.ZBAPI
 {
@@ -40,6 +41,13 @@ namespace Remover.Facade.ZBAPI
 
             var request = new RestRequest(url, Method.GET);
             var result = client.Execute(request);
+            client.Timeout = 5000;
+            //Log.Debug($"Zb,statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content}");
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                Alert(result.ErrorMessage);
+                return default(T);
+            }
             if (result.Content == null || result.Content == string.Empty)
             {
                 Alert(result.ErrorMessage);

@@ -113,9 +113,15 @@
     <Compile Include="OkExAPI\OkExAPIFacade.cs" />
     <Compile Include="Product\OkExProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\AddQuotes.cs" />
     <Compile Include="Service\CoinResultService.cs" />
     <Compile Include="SubScribeFacade.cs" />
-    <Compile Include="Ticket\TicketFacade.cs" />
+    <Compile Include="Ticket\BiAnTicket.cs" />
+    <Compile Include="Ticket\GateTicket.cs" />
+    <Compile Include="Ticket\HuoBiTicket.cs" />
+    <Compile Include="Ticket\OkExTicket.cs" />
+    <Compile Include="Ticket\TicketBase.cs" />
+    <Compile Include="Ticket\ZBTicket.cs" />
     <Compile Include="ZBAPI\ApiUrlList.cs" />
     <Compile Include="ZBAPI\ZbAPIFacade.cs" />
     <Compile Include="Product\ZBProduct.cs" />

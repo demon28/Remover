@@ -25,7 +25,6 @@ namespace Remover.Facade.BiAnAPI
             //System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Ssl3;
             client = new RestClient();
             client = new RestClient(HUOBI_HOST_URL);
-
             client.AddDefaultHeader("Content-Type", "application/json");
             client.AddDefaultHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
         }
@@ -39,14 +38,20 @@ namespace Remover.Facade.BiAnAPI
         /// <returns></returns>
         public T SendRequestContent<T>(string resourcePath, string parameters = "") where T : new()
         {
-
             try
             {
                 var url = $"{HUOBI_HOST_URL}{resourcePath}?{parameters}";
 
                 var request = new RestRequest(url, Method.GET);
                 var result = client.Execute(request);
-                Log.Debug($"statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content}");
+                client.Timeout = 5000;
+                //Log.Debug($"bian,statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content}");
+                if (result.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    //Log.Error($"bian,statusCode={result.StatusCode}");
+                    Alert(result.ErrorMessage);
+                    return default(T);
+                }
                 if (result.Content == null || result.Content == string.Empty)
                 {
                     Alert(result.ErrorMessage);
@@ -61,9 +66,8 @@ namespace Remover.Facade.BiAnAPI
                 Alert(ex.Message);
                 return default(T);
             }
-
-
         }
+        
 
     }
 }

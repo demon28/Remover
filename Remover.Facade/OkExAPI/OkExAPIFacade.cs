@@ -8,6 +8,7 @@ using Remover.Entities;
 using Remover.Entities.OKRequestModel;
 using RestSharp;
 using Winner.Framework.Core.Facade;
+using Winner.Framework.Utils;
 
 namespace Remover.Facade.OkExAPI
 {
@@ -49,6 +50,13 @@ namespace Remover.Facade.OkExAPI
 
             var request = new RestRequest(url, Method.GET);
             var result = client.Execute(request);
+            client.Timeout = 5000;
+            //Log.Debug($"okEx,statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content};ResponseStatus={result.ResponseStatus}");
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                Alert(result.ErrorMessage);
+                return default(T);
+            }
             if (result.Content == null || result.Content == string.Empty)
             {
                 Alert(result.ErrorMessage);

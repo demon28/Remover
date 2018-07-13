@@ -16,7 +16,6 @@ namespace Remover.Facade
 
         public static ExChangeBase InstanExchange(ExchangeType exchange)
         {
-
             switch (exchange)
             {
                 case ExchangeType.HuoBi:

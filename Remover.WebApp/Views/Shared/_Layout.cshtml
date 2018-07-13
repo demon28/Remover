@@ -23,23 +23,23 @@
 <body class="no-skin">
     <div id="navbar" class="navbar navbar-default ace-save-state">
         <div class="navbar-container ace-save-state" id="navbar-container">
-            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+            @*<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
                 <span class="sr-only">切换侧边栏</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </button>
+            </button>*@
 
             <div class="navbar-header pull-left">
                 <a href="#" class="navbar-brand">
                     <small>
                         <i class="fa fa-leaf"></i>
-                        云矿-交易管理后台
+                        矿工综合交易
                     </small>
                 </a>
             </div>
 
-            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+            @*<div class="navbar-buttons navbar-header pull-right" role="navigation">
                 <ul class="nav ace-nav">
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -60,7 +60,7 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div>*@
         </div><!-- /.navbar-container 登陆信息 -->
     </div>
 
@@ -69,10 +69,10 @@
 				try{ace.settings.loadState('main-container')}catch(e){}
         </script>
         <!-- #section:basics/sidebar 基础模块/侧边栏 -->
-        @Html.Partial("~/Views/Shared/_PartialMenu.cshtml")
+        @*@Html.Partial("~/Views/Shared/_PartialMenu.cshtml")*@
 
         <div class="main-content">
-            @RenderSection("breadcrumb", true)<!-- /.breadcrumbs 导航栏-->
+            @*@RenderSection("breadcrumb", true)*@<!-- /.breadcrumbs 导航栏-->
 
             <div class="page-content">
                 <!-- /.ace-settings-container -->

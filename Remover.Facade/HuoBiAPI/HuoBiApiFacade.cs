@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Web;
 using Winner.Framework.Core.Facade;
 using Remover.Entities;
-
+using Winner.Framework.Utils;
+using System.Net;
 
 namespace Remover.Facade.HuoBiAPI
 {
@@ -60,6 +61,7 @@ namespace Remover.Facade.HuoBiAPI
                 throw new ArgumentException("SECRET_KEY  Cannt Be Null Or Empty");
             if (string.IsNullOrEmpty(HUOBI_HOST))
                 throw new ArgumentException("HUOBI_HOST  Cannt Be Null Or Empty");
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             client = new RestClient(HUOBI_HOST_URL);
             client.AddDefaultHeader("Content-Type", "application/json");
             client.AddDefaultHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36");
@@ -79,6 +81,7 @@ namespace Remover.Facade.HuoBiAPI
         /// <returns></returns>
         public T SendRequestContent<T>(string resourcePath, string parameters = "") where T : new()
         {
+            
             parameters = UrlHelper.UriEncodeParameterValue(GetCommonParameters() + parameters);//请求参数
             var sign = UrlHelper.GetSignatureStr(Method.GET, HUOBI_HOST, resourcePath, parameters,SECRET_KEY);//签名
             parameters += $"&Signature={sign}";
@@ -87,6 +90,14 @@ namespace Remover.Facade.HuoBiAPI
    
             var request = new RestRequest(url, Method.GET);
             var result = client.Execute(request);
+            client.Timeout = 5000;
+            //Log.Debug($"HuoBi,statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content}");
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                Alert(result.ErrorMessage);
+                return default(T);
+            }
+
             if (result.Content==null||result.Content==string.Empty)
             {
                 Alert(result.ErrorMessage);
