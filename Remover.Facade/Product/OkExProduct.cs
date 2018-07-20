@@ -74,7 +74,7 @@ namespace Remover.Facade
             return ticket.ticker.last;
         }
 
-        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override BasePriceModel GetNowPrice(string coin, string currency)
         {
             BasePriceModel basePrice = new BasePriceModel();
             string Symbol = ConvertSymbolTool.OKConvertSymbol(coin, currency);
@@ -89,6 +89,41 @@ namespace Remover.Facade
             basePrice.sellPice = result.ticker.sell;
             basePrice.price = result.ticker.last;
             return basePrice;
+        }
+
+        public override LatePriceModel GetLatestRecord(string coin, string currency)
+        {
+            LatePriceModel latePrice = new LatePriceModel();
+            string Symbol = ConvertSymbolTool.OKConvertSymbol(coin, currency);
+            var result = OkAPi.SendRequestContent<DepthRequest>(ApiUrlList.API_Depth, Symbol);
+
+            if (result == null)
+            {
+                Log.Error("OKEx数据为空" + coin);
+                return latePrice;
+            }
+
+            List<PriceModel> asksList = new List<PriceModel>();
+            foreach (var asksPrice in result.asks)
+            {
+                PriceModel asks = new PriceModel();
+                asks.price = asksPrice[0];
+                asks.amount = asksPrice[1];
+                asksList.Add(asks);
+            }
+
+            List<PriceModel> bidsList = new List<PriceModel>();
+            foreach (var bidsPrice in result.bids)
+            {
+                PriceModel bids = new PriceModel();
+                bids.price = bidsPrice[0];
+                bids.amount = bidsPrice[1];
+                bidsList.Add(bids);
+            }
+
+            latePrice.Asks = asksList;
+            latePrice.Bids = bidsList;
+            return latePrice;
         }
     }
 }

@@ -15,5 +15,10 @@ namespace Remover.Facade.GateAPI
         /// </summary>
         public const string API_Market = "/api2/1/tickers";
 
+        /// <summary>
+        /// 市场深度
+        /// </summary>
+        public const string API_OrderBooks = "/api2/1/orderBook/";
+
     }
 }

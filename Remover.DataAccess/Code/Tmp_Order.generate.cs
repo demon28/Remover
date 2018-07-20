@@ -1,7 +1,7 @@
 ﻿/***************************************************
 *
 * Data Access Layer Of Winner Framework
-* FileName : Tr_Quotes.generate.cs 
+* FileName : Tmp_Order.generate.cs 
 * Version : V 1.1.0
 * Author：架构师 曾杰(Jie)
 * E_Mail : 6e9e@163.com
@@ -9,7 +9,7 @@
 * Blog : http://www.cnblogs.com/fineblog/
 * Company ：深圳市乾海盛世移动支付有限公司
 * Copyright (C) Winner研发中心
-* CreateTime : 2018-07-05 11:50:30  
+* CreateTime : 2018-07-18 20:10:21  
 * 
 ***************************************************/
 using System;
@@ -24,36 +24,37 @@ using Remover.Entities;
 namespace Remover.DataAccess
 {
     /// <summary>
-    /// Data Access Layer Object Of Tr_Quotes
+    /// Data Access Layer Object Of Tmp_Order
     /// </summary>
-    public partial class Tr_Quotes : DataAccessBase
+    public partial class Tmp_Order : DataAccessBase
     {
         #region 默认构造
 
-        public Tr_Quotes() : base() { }
+        public Tmp_Order() : base() { }
 
-        public Tr_Quotes(DataRow dataRow)
+        public Tmp_Order(DataRow dataRow)
             : base(dataRow) { }
 
         #endregion 默认构造
 
         #region 对应表结构的常量属性
         
-		public const string _quotes_id="quotes_id";
-		public const string _coin_id="coin_id";
-		public const string _platform_id="platform_id";
-		public const string _coin_name="coin_name";
-		public const string _market="market";
-		public const string _price="price";
-		public const string _buyprice="buyprice";
-		public const string _sellprice="sellprice";
-		public const string _currencytype="currencytype";
-		public const string _timestamps="timestamps";
+		public const string _orderid="orderid";
+		public const string _orderno="orderno";
+		public const string _outorderno="outorderno";
+		public const string _rate="rate";
+		public const string _amount="amount";
+		public const string _status="status";
 		public const string _create_time="create_time";
 		public const string _remark="remark";
+		public const string _buyorsell="buyorsell";
+		public const string _user_id="user_id";
+		public const string _market="market";
+		public const string _currency="currency";
+		public const string _coin_id="coin_id";
 
     
-        public const string _TABLENAME="tr_quotes";
+        public const string _TABLENAME="tmp_order";
         #endregion 对应表结构的常量属性
 
         #region 公开属性
@@ -61,34 +62,82 @@ namespace Remover.DataAccess
 		/// <summary>
 		/// [default:0]
 		/// </summary>
-		public int QuotesId
+		public int Orderid
 		{
-			get { return getProperty<int>(_quotes_id); }
-			set { setProperty(_quotes_id,value); }
-		}
-		/// <summary>
-		/// [default:0]
-		/// </summary>
-		public int CoinId
-		{
-			get { return getProperty<int>(_coin_id); }
-			set { setProperty(_coin_id,value); }
-		}
-		/// <summary>
-		/// [default:0]
-		/// </summary>
-		public int PlatformId
-		{
-			get { return getProperty<int>(_platform_id); }
-			set { setProperty(_platform_id,value); }
+			get { return getProperty<int>(_orderid); }
+			set { setProperty(_orderid,value); }
 		}
 		/// <summary>
 		/// [default:string.Empty]
 		/// </summary>
-		public string CoinName
+		public string Orderno
 		{
-			get { return getProperty<string>(_coin_name); }
-			set { setProperty(_coin_name,value); }
+			get { return getProperty<string>(_orderno); }
+			set { setProperty(_orderno,value); }
+		}
+		/// <summary>
+		/// [default:string.Empty]
+		/// </summary>
+		public string Outorderno
+		{
+			get { return getProperty<string>(_outorderno); }
+			set { setProperty(_outorderno,value); }
+		}
+		/// <summary>
+		/// [default:0]
+		/// </summary>
+		public decimal Rate
+		{
+			get { return getProperty<decimal>(_rate); }
+			set { setProperty(_rate,value); }
+		}
+		/// <summary>
+		/// [default:0]
+		/// </summary>
+		public decimal Amount
+		{
+			get { return getProperty<decimal>(_amount); }
+			set { setProperty(_amount,value); }
+		}
+		/// <summary>
+		/// [default:0]
+		/// </summary>
+		public uint Status
+		{
+			get { return getProperty<uint>(_status); }
+			set { setProperty(_status,value); }
+		}
+		/// <summary>
+		/// [default:DBNull.Value]
+		/// </summary>
+		public DateTime? CreateTime
+		{
+			get { return getProperty<DateTime?>(_create_time); }
+			set { setProperty(_create_time,value); }
+		}
+		/// <summary>
+		/// [default:string.Empty]
+		/// </summary>
+		public string Remark
+		{
+			get { return getProperty<string>(_remark); }
+			set { setProperty(_remark,value); }
+		}
+		/// <summary>
+		/// [default:0]
+		/// </summary>
+		public int Buyorsell
+		{
+			get { return getProperty<int>(_buyorsell); }
+			set { setProperty(_buyorsell,value); }
+		}
+		/// <summary>
+		/// [default:DBNull.Value]
+		/// </summary>
+		public uint? UserId
+		{
+			get { return getProperty<uint?>(_user_id); }
+			set { setProperty(_user_id,value); }
 		}
 		/// <summary>
 		/// [default:string.Empty]
@@ -99,60 +148,20 @@ namespace Remover.DataAccess
 			set { setProperty(_market,value); }
 		}
 		/// <summary>
-		/// [default:0]
+		/// [default:DBNull.Value]
 		/// </summary>
-		public decimal Price
+		public int? Currency
 		{
-			get { return getProperty<decimal>(_price); }
-			set { setProperty(_price,value); }
+			get { return getProperty<int?>(_currency); }
+			set { setProperty(_currency,value); }
 		}
 		/// <summary>
-		/// [default:0]
+		/// [default:DBNull.Value]
 		/// </summary>
-		public decimal Buyprice
+		public int? CoinId
 		{
-			get { return getProperty<decimal>(_buyprice); }
-			set { setProperty(_buyprice,value); }
-		}
-		/// <summary>
-		/// [default:0]
-		/// </summary>
-		public decimal Sellprice
-		{
-			get { return getProperty<decimal>(_sellprice); }
-			set { setProperty(_sellprice,value); }
-		}
-		/// <summary>
-		/// [default:0]
-		/// </summary>
-		public int Currencytype
-		{
-			get { return getProperty<int>(_currencytype); }
-			set { setProperty(_currencytype,value); }
-		}
-		/// <summary>
-		/// [default:string.Empty]
-		/// </summary>
-		public string Timestamps
-		{
-			get { return getProperty<string>(_timestamps); }
-			set { setProperty(_timestamps,value); }
-		}
-		/// <summary>
-		/// [default:new DateTime()]
-		/// </summary>
-		public DateTime CreateTime
-		{
-			get { return getProperty<DateTime>(_create_time); }
-			set { setProperty(_create_time,value); }
-		}
-		/// <summary>
-		/// [default:string.Empty]
-		/// </summary>
-		public string Remark
-		{
-			get { return getProperty<string>(_remark); }
-			set { setProperty(_remark,value); }
+			get { return getProperty<int?>(_coin_id); }
+			set { setProperty(_coin_id,value); }
 		}
 
         #endregion 公开属性
@@ -167,18 +176,19 @@ namespace Remover.DataAccess
         protected override DataRow BuildRow()
         {
             DataTable dt = new DataTable(_TABLENAME);
-			dt.Columns.Add(_quotes_id, typeof(int)).DefaultValue = 0;
-			dt.Columns.Add(_coin_id, typeof(int)).DefaultValue = 0;
-			dt.Columns.Add(_platform_id, typeof(int)).DefaultValue = 0;
-			dt.Columns.Add(_coin_name, typeof(string)).DefaultValue = string.Empty;
-			dt.Columns.Add(_market, typeof(string)).DefaultValue = string.Empty;
-			dt.Columns.Add(_price, typeof(decimal)).DefaultValue = 0;
-			dt.Columns.Add(_buyprice, typeof(decimal)).DefaultValue = 0;
-			dt.Columns.Add(_sellprice, typeof(decimal)).DefaultValue = 0;
-			dt.Columns.Add(_currencytype, typeof(int)).DefaultValue = 0;
-			dt.Columns.Add(_timestamps, typeof(string)).DefaultValue = string.Empty;
-			dt.Columns.Add(_create_time, typeof(DateTime)).DefaultValue = new DateTime();
+			dt.Columns.Add(_orderid, typeof(int)).DefaultValue = 0;
+			dt.Columns.Add(_orderno, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_outorderno, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_rate, typeof(decimal)).DefaultValue = 0;
+			dt.Columns.Add(_amount, typeof(decimal)).DefaultValue = 0;
+			dt.Columns.Add(_status, typeof(uint)).DefaultValue = 0;
+			dt.Columns.Add(_create_time, typeof(DateTime)).DefaultValue = DBNull.Value;
 			dt.Columns.Add(_remark, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_buyorsell, typeof(int)).DefaultValue = 0;
+			dt.Columns.Add(_user_id, typeof(uint)).DefaultValue = DBNull.Value;
+			dt.Columns.Add(_market, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_currency, typeof(int)).DefaultValue = DBNull.Value;
+			dt.Columns.Add(_coin_id, typeof(int)).DefaultValue = DBNull.Value;
 
             return dt.NewRow();
         }
@@ -189,62 +199,65 @@ namespace Remover.DataAccess
         
 		protected bool DeleteByCondition(string condition)
         {
-            string sql = @"delete from tr_quotes where " + condition;
+            string sql = @"delete from tmp_order where " + condition;
             return base.DeleteBySql(sql);
         }
 		
-        public bool Delete(int quotesId)
+        public bool Delete(int orderid)
         {
-            string condition = "quotes_id=?quotes_id";
-            AddParameter(_quotes_id, quotesId);
+            string condition = "orderid=?orderid";
+            AddParameter(_orderid, orderid);
             return DeleteByCondition(condition);
         }
 		
         public bool Delete()
         {
-            string condition = "quotes_id=?quotes_id";
-            AddParameter(_quotes_id, QuotesId);
+            string condition = "orderid=?orderid";
+            AddParameter(_orderid, Orderid);
             return DeleteByCondition(condition);
         }
 
         public bool Insert()
         {
 string sql=@"insert into
-tr_quotes(
-  coin_id,
-  platform_id,
-  coin_name,
+tmp_order(
+  orderno,
+  outorderno,
+  rate,
+  amount,
+  status,
+  remark,
+  buyorsell,
+  user_id,
   market,
-  price,
-  buyprice,
-  sellprice,
-  currencytype,
-  timestamps,
-  remark)
+  currency,
+  coin_id)
 values(
-  ?coin_id,
-  ?platform_id,
-  ?coin_name,
+  ?orderno,
+  ?outorderno,
+  ?rate,
+  ?amount,
+  ?status,
+  ?remark,
+  ?buyorsell,
+  ?user_id,
   ?market,
-  ?price,
-  ?buyprice,
-  ?sellprice,
-  ?currencytype,
-  ?timestamps,
-  ?remark)";
-			AddParameter(_coin_id,DataRow[_coin_id]);
-			AddParameter(_platform_id,DataRow[_platform_id]);
-			AddParameter(_coin_name,DataRow[_coin_name]);
-			AddParameter(_market,DataRow[_market]);
-			AddParameter(_price,DataRow[_price]);
-			AddParameter(_buyprice,DataRow[_buyprice]);
-			AddParameter(_sellprice,DataRow[_sellprice]);
-			AddParameter(_currencytype,DataRow[_currencytype]);
-			AddParameter(_timestamps,DataRow[_timestamps]);
+  ?currency,
+  ?coin_id)";
+			AddParameter(_orderno,DataRow[_orderno]);
+			AddParameter(_outorderno,DataRow[_outorderno]);
+			AddParameter(_rate,DataRow[_rate]);
+			AddParameter(_amount,DataRow[_amount]);
+			AddParameter(_status,DataRow[_status]);
 			AddParameter(_remark,DataRow[_remark]);
+			AddParameter(_buyorsell,DataRow[_buyorsell]);
+			AddParameter(_user_id,DataRow[_user_id]);
+			AddParameter(_market,DataRow[_market]);
+			AddParameter(_currency,DataRow[_currency]);
+			AddParameter(_coin_id,DataRow[_coin_id]);
 			int @id;
 			bool result=InsertBySql(sql,out @id);
-			QuotesId = @id;
+			Orderid = @id;
 			return result;
 
         }
@@ -257,7 +270,7 @@ values(
         protected bool UpdateByCondition(string condition)
         {
             //移除主键标记
-            ChangePropertys.Remove(_quotes_id);
+            ChangePropertys.Remove(_orderid);
             
             if (ChangePropertys.Count == 0)
             {
@@ -265,14 +278,14 @@ values(
             }
             
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("update tr_quotes set");
+            sql.AppendLine("update tmp_order set");
             while (ChangePropertys.MoveNext())
             {
          		sql.AppendFormat(" {0}{1}=?{1} ", (ChangePropertys.CurrentIndex == 0 ? string.Empty : ","), ChangePropertys.Current);
                 AddParameter(ChangePropertys.Current, DataRow[ChangePropertys.Current]);
             }
-            sql.AppendLine(" where quotes_id=?quotes_id");
-            AddParameter(_quotes_id, DataRow[_quotes_id]);
+            sql.AppendLine(" where orderid=?orderid");
+            AddParameter(_orderid, DataRow[_orderid]);
             if (!string.IsNullOrEmpty(condition))
                 sql.AppendLine(" and " + condition);
                 
@@ -285,27 +298,28 @@ values(
         {
             string sql = @"
 select
-  quotes_id,
-  coin_id,
-  platform_id,
-  coin_name,
-  market,
-  price,
-  buyprice,
-  sellprice,
-  currencytype,
-  timestamps,
+  orderid,
+  orderno,
+  outorderno,
+  rate,
+  amount,
+  status,
   create_time,
-  remark
-from tr_quotes
+  remark,
+  buyorsell,
+  user_id,
+  market,
+  currency,
+  coin_id
+from tmp_order
 where " + condition;
             return base.SelectBySql(sql);
         }
 
-        public bool SelectByPK(int quotesId)
+        public bool SelectByPK(int orderid)
         {
-            string condition = "quotes_id=?quotes_id";
-            AddParameter(_quotes_id, quotesId);
+            string condition = "orderid=?orderid";
+            AddParameter(_orderid, orderid);
             return SelectByCondition(condition);
         }
 
@@ -317,15 +331,15 @@ where " + condition;
     }
     
     /// <summary>
-    /// Data Access Layer Object Collection Of Tr_Quotes
+    /// Data Access Layer Object Collection Of Tmp_Order
     /// </summary>
-    public partial class Tr_QuotesCollection : DataAccessCollectionBase
+    public partial class Tmp_OrderCollection : DataAccessCollectionBase
     {
         #region 默认构造
  
-        public Tr_QuotesCollection() { }
+        public Tmp_OrderCollection() { }
 
-        public Tr_QuotesCollection(DataTable table)
+        public Tmp_OrderCollection(DataTable table)
             : base(table) { }
             
         #endregion 默认构造
@@ -333,36 +347,37 @@ where " + condition;
         #region 私有成员
         protected override DataAccessBase GetItemByIndex(int index)
         {
-            return new Tr_Quotes(DataTable.Rows[index]);
+            return new Tmp_Order(DataTable.Rows[index]);
         }
         
         protected override DataTable BuildTable()
         {
-            return new  Tr_Quotes().CloneSchemaOfTable();
+            return new  Tmp_Order().CloneSchemaOfTable();
         }
         
         protected override string TableName
         {
-            get { return Tr_Quotes._TABLENAME; }
+            get { return Tmp_Order._TABLENAME; }
         }
         
         protected bool ListByCondition(string condition)
         {
             string sql = @"
 select
-  quotes_id,
-  coin_id,
-  platform_id,
-  coin_name,
-  market,
-  price,
-  buyprice,
-  sellprice,
-  currencytype,
-  timestamps,
+  orderid,
+  orderno,
+  outorderno,
+  rate,
+  amount,
+  status,
   create_time,
-  remark
-from tr_quotes
+  remark,
+  buyorsell,
+  user_id,
+  market,
+  currency,
+  coin_id
+from tmp_order
 where " + condition;
             return base.ListBySql(sql);
         }
@@ -375,17 +390,17 @@ where " + condition;
         
         public bool DeleteByCondition(string condition)
         {
-            string sql = "delete from tr_quotes where " + condition;
+            string sql = "delete from tmp_order where " + condition;
             return DeleteBySql(sql);
         }
         #endregion
         
         #region 公开成员
-        public Tr_Quotes this[int index]
+        public Tmp_Order this[int index]
         {
             get
             {
-                return new Tr_Quotes(DataTable.Rows[index]);
+                return new Tmp_Order(DataTable.Rows[index]);
             }
         }
 
@@ -396,28 +411,28 @@ where " + condition;
         
         #region Linq
         
-        public Tr_Quotes Find(Predicate<Tr_Quotes> match)
+        public Tmp_Order Find(Predicate<Tmp_Order> match)
         {
-            foreach (Tr_Quotes item in this)
+            foreach (Tmp_Order item in this)
             {
                 if (match(item))
                     return item;
             }
             return null;
         }
-        public Tr_QuotesCollection FindAll(Predicate<Tr_Quotes> match)
+        public Tmp_OrderCollection FindAll(Predicate<Tmp_Order> match)
         {
-            Tr_QuotesCollection list = new Tr_QuotesCollection();
-            foreach (Tr_Quotes item in this)
+            Tmp_OrderCollection list = new Tmp_OrderCollection();
+            foreach (Tmp_Order item in this)
             {
                 if (match(item))
                     list.Add(item);
             }
             return list;
         }
-        public bool Contains(Predicate<Tr_Quotes> match)
+        public bool Contains(Predicate<Tmp_Order> match)
         {
-            foreach (Tr_Quotes item in this)
+            foreach (Tmp_Order item in this)
             {
                 if (match(item))
                     return true;
@@ -425,10 +440,10 @@ where " + condition;
             return false;
         }
 
-        public bool DeleteAt(Predicate<Tr_Quotes> match)
+        public bool DeleteAt(Predicate<Tmp_Order> match)
         {
             BeginTransaction();
-            foreach (Tr_Quotes item in this)
+            foreach (Tmp_Order item in this)
             {
                 item.ReferenceTransactionFrom(Transaction);
                 if (!match(item))

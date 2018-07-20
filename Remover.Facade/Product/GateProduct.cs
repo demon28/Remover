@@ -76,7 +76,7 @@ namespace Remover.Facade
             return result.last;
         }
 
-        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override BasePriceModel GetNowPrice(string coin, string currency)
         {
             BasePriceModel basePrice = new BasePriceModel();
             string Symbol = ConvertSymbolTool.GateConvertSymbol(coin, currency);
@@ -91,5 +91,40 @@ namespace Remover.Facade
             basePrice.price = result.last;
             return basePrice;
         }
+
+        public override LatePriceModel GetLatestRecord(string coin, string currency)
+        {
+            LatePriceModel latePrice = new LatePriceModel();
+            string Symbol = ConvertSymbolTool.GateConvertSymbol(coin, currency);
+            var result = gateAPI.SendRequestContent<DepthRequest>(ApiUrlList.API_OrderBooks, Symbol);
+            if (result == null)
+            {
+                Log.Error("GATE数据为空" + coin);
+                return latePrice;
+            }
+
+            List<PriceModel> asksList = new List<PriceModel>();
+            foreach (var asksPrice in result.asks)
+            {
+                PriceModel asks = new PriceModel();
+                asks.price = asksPrice[0];
+                asks.amount = asksPrice[1];
+                asksList.Add(asks);
+            }
+
+            List<PriceModel> bidsList = new List<PriceModel>();
+            foreach (var bidsPrice in result.bids)
+            {
+                PriceModel bids = new PriceModel();
+                bids.price = bidsPrice[0];
+                bids.amount = bidsPrice[1];
+                bidsList.Add(bids);
+            }
+
+            latePrice.Asks = asksList;
+            latePrice.Bids = bidsList;
+            return latePrice;
+        }
+
     }
 }

@@ -23,9 +23,9 @@ namespace Remover.Entities
             return "&symbol=" + (coin.ToString() + currency.ToString()).ToUpper();
         }
 
-        public static string BiAnConvertSymbol(string coinName,CurrencyType currency)
+        public static string BiAnConvertSymbol(string coinName,string currency)
         {
-            return "&symbol=" + (coinName + currency.ToString()).ToUpper();
+            return "&symbol=" + (coinName + currency).ToUpper();
         }
 
 
@@ -41,9 +41,9 @@ namespace Remover.Entities
             return "&symbol=" + (coin.ToString() + currency.ToString()).ToLower();
         }
 
-        public static string HBConvertSymbol(string coinName, CurrencyType currency)
+        public static string HBConvertSymbol(string coinName, string currency)
         {
-            return "&symbol=" + (coinName + currency.ToString()).ToLower();
+            return "&symbol=" + (coinName + currency).ToLower();
         }
 
         /// <summary>
@@ -57,9 +57,9 @@ namespace Remover.Entities
             return "symbol="+(coin.ToString() + "_"+currency.ToString()).ToLower();
         }
 
-        public static string OKConvertSymbol(string coinName, CurrencyType currency)
+        public static string OKConvertSymbol(string coinName, string currency)
         {
-            return "symbol=" + (coinName + "_" + currency.ToString()).ToLower();
+            return "symbol=" + (coinName + "_" + currency).ToLower();
         }
 
 
@@ -74,9 +74,9 @@ namespace Remover.Entities
             return (coin.ToString() + "_" + currency.ToString()).ToLower();
         }
 
-        public static string GateConvertSymbol(string coinName, CurrencyType currency)
+        public static string GateConvertSymbol(string coinName, string currency)
         {
-            return (coinName + "_" + currency.ToString()).ToLower();
+            return (coinName + "_" + currency).ToLower();
         }
 
         /// <summary>
@@ -90,9 +90,9 @@ namespace Remover.Entities
             return "market="+(coin.ToString() + "_" + currency.ToString()).ToLower();
         }
 
-        public static string ZBConvertSymbol(string coinNam, CurrencyType currency)
+        public static string ZBConvertSymbol(string coinNam, string currency)
         {
-            return "market=" + (coinNam + "_" + currency.ToString()).ToLower();
+            return "market=" + (coinNam + "_" + currency).ToLower();
         }
     }
 }

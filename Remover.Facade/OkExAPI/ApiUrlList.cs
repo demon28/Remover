@@ -23,5 +23,10 @@ namespace Remover.Facade.OkExAPI
         /// </summary>
         public const string API_Market = "/api/v1/tickers.do";
 
+        /// <summary>
+        /// 市场深度
+        /// </summary>
+        public const string API_Depth = "/api/v1/depth.do";
+
     }
 }

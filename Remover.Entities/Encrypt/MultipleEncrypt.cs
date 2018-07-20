@@ -9,9 +9,6 @@ namespace Remover.Entities.Encrypt
 {
     public class MultipleEncrypt
     {
-
-
-
         public static string SHA256Encrypt(string strIN)
         {
             byte[] tmpByte;

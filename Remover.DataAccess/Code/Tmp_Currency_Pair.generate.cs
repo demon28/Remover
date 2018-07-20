@@ -1,7 +1,7 @@
 ﻿/***************************************************
 *
 * Data Access Layer Of Winner Framework
-* FileName : Tr_Price.generate.cs 
+* FileName : Tmp_Currency_Pair.generate.cs 
 * Version : V 1.1.0
 * Author：架构师 曾杰(Jie)
 * E_Mail : 6e9e@163.com
@@ -9,7 +9,7 @@
 * Blog : http://www.cnblogs.com/fineblog/
 * Company ：深圳市乾海盛世移动支付有限公司
 * Copyright (C) Winner研发中心
-* CreateTime : 2018-06-16 10:31:34  
+* CreateTime : 2018-07-20 15:10:08  
 * 
 ***************************************************/
 using System;
@@ -20,34 +20,34 @@ using Winner.Framework.Core;
 using Winner.Framework.Core.DataAccess;
 using Winner.Framework.Core.DataAccess.MySql;
 using Winner.Framework.Utils;
-
+using Remover.Entities;
 namespace Remover.DataAccess
 {
     /// <summary>
-    /// Data Access Layer Object Of Tr_Price
+    /// Data Access Layer Object Of Tmp_Currency_Pair
     /// </summary>
-    public partial class Tr_Price : DataAccessBase
+    public partial class Tmp_Currency_Pair : DataAccessBase
     {
         #region 默认构造
 
-        public Tr_Price() : base() { }
+        public Tmp_Currency_Pair() : base() { }
 
-        public Tr_Price(DataRow dataRow)
+        public Tmp_Currency_Pair(DataRow dataRow)
             : base(dataRow) { }
 
         #endregion 默认构造
 
         #region 对应表结构的常量属性
         
-		public const string _pid="pid";
-		public const string _eid="eid";
-		public const string _cid="cid";
-		public const string _price="price";
-		public const string _createtime="createtime";
-		public const string _remark="remark";
+		public const string _pair_id="pair_id";
+		public const string _currency_id="currency_id";
+		public const string _ex_currency_id="ex_currency_id";
+		public const string _pair_code="pair_code";
+		public const string _remarks="remarks";
+		public const string _create_time="create_time";
 
     
-        public const string _TABLENAME="tr_price";
+        public const string _TABLENAME="tmp_currency_pair";
         #endregion 对应表结构的常量属性
 
         #region 公开属性
@@ -55,49 +55,50 @@ namespace Remover.DataAccess
 		/// <summary>
 		/// [default:0]
 		/// </summary>
-		public int Pid
+		public int PairId
 		{
-			get { return getProperty<int>(_pid); }
-			set { setProperty(_pid,value); }
+			get { return getProperty<int>(_pair_id); }
+			set { setProperty(_pair_id,value); }
 		}
 		/// <summary>
-		/// [default:DBNull.Value]
+		/// [default:0]
 		/// </summary>
-		public int? Eid
+		public int CurrencyId
 		{
-			get { return getProperty<int?>(_eid); }
-			set { setProperty(_eid,value); }
+			get { return getProperty<int>(_currency_id); }
+			set { setProperty(_currency_id,value); }
 		}
 		/// <summary>
-		/// [default:DBNull.Value]
+		/// [default:0]
 		/// </summary>
-		public int? Cid
+		public int ExCurrencyId
 		{
-			get { return getProperty<int?>(_cid); }
-			set { setProperty(_cid,value); }
-		}
-		/// <summary>
-		/// [default:DBNull.Value]
-		/// </summary>
-		public decimal? Price
-		{
-			get { return getProperty<decimal?>(_price); }
-			set { setProperty(_price,value); }
-		}
-		/// <summary>
-		/// [default:DBNull.Value]
-		/// </summary>
-		public DateTime? Createtime
-		{
-			get { return getProperty<DateTime>(_createtime); }
+			get { return getProperty<int>(_ex_currency_id); }
+			set { setProperty(_ex_currency_id,value); }
 		}
 		/// <summary>
 		/// [default:string.Empty]
 		/// </summary>
-		public string Remark
+		public string PairCode
 		{
-			get { return getProperty<string>(_remark); }
-			set { setProperty(_remark,value); }
+			get { return getProperty<string>(_pair_code); }
+			set { setProperty(_pair_code,value); }
+		}
+		/// <summary>
+		/// [default:string.Empty]
+		/// </summary>
+		public string Remarks
+		{
+			get { return getProperty<string>(_remarks); }
+			set { setProperty(_remarks,value); }
+		}
+		/// <summary>
+		/// [default:new DateTime()]
+		/// </summary>
+		public DateTime CreateTime
+		{
+			get { return getProperty<DateTime>(_create_time); }
+			set { setProperty(_create_time,value); }
 		}
 
         #endregion 公开属性
@@ -112,12 +113,12 @@ namespace Remover.DataAccess
         protected override DataRow BuildRow()
         {
             DataTable dt = new DataTable(_TABLENAME);
-			dt.Columns.Add(_pid, typeof(int)).DefaultValue = 0;
-			dt.Columns.Add(_eid, typeof(int)).DefaultValue = DBNull.Value;
-			dt.Columns.Add(_cid, typeof(int)).DefaultValue = DBNull.Value;
-			dt.Columns.Add(_price, typeof(decimal)).DefaultValue = DBNull.Value;
-			dt.Columns.Add(_createtime, typeof(DateTime)).DefaultValue = DBNull.Value;
-			dt.Columns.Add(_remark, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_pair_id, typeof(int)).DefaultValue = 0;
+			dt.Columns.Add(_currency_id, typeof(int)).DefaultValue = 0;
+			dt.Columns.Add(_ex_currency_id, typeof(int)).DefaultValue = 0;
+			dt.Columns.Add(_pair_code, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_remarks, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_create_time, typeof(DateTime)).DefaultValue = new DateTime();
 
             return dt.NewRow();
         }
@@ -128,44 +129,44 @@ namespace Remover.DataAccess
         
 		protected bool DeleteByCondition(string condition)
         {
-            string sql = @"delete from tr_price where " + condition;
+            string sql = @"delete from tmp_currency_pair where " + condition;
             return base.DeleteBySql(sql);
         }
 		
-        public bool Delete(int pid)
+        public bool Delete(int pairId)
         {
-            string condition = "pid=?pid";
-            AddParameter(_pid, pid);
+            string condition = "pair_id=?pair_id";
+            AddParameter(_pair_id, pairId);
             return DeleteByCondition(condition);
         }
 		
         public bool Delete()
         {
-            string condition = "pid=?pid";
-            AddParameter(_pid, Pid);
+            string condition = "pair_id=?pair_id";
+            AddParameter(_pair_id, PairId);
             return DeleteByCondition(condition);
         }
 
         public bool Insert()
         {
 string sql=@"insert into
-tr_price(
-  eid,
-  cid,
-  price,
-  remark)
+tmp_currency_pair(
+  currency_id,
+  ex_currency_id,
+  pair_code,
+  remarks)
 values(
-  ?eid,
-  ?cid,
-  ?price,
-  ?remark)";
-			AddParameter(_eid,DataRow[_eid]);
-			AddParameter(_cid,DataRow[_cid]);
-			AddParameter(_price,DataRow[_price]);
-			AddParameter(_remark,DataRow[_remark]);
+  ?currency_id,
+  ?ex_currency_id,
+  ?pair_code,
+  ?remarks)";
+			AddParameter(_currency_id,DataRow[_currency_id]);
+			AddParameter(_ex_currency_id,DataRow[_ex_currency_id]);
+			AddParameter(_pair_code,DataRow[_pair_code]);
+			AddParameter(_remarks,DataRow[_remarks]);
 			int @id;
 			bool result=InsertBySql(sql,out @id);
-			Pid = @id;
+			PairId = @id;
 			return result;
 
         }
@@ -178,7 +179,7 @@ values(
         protected bool UpdateByCondition(string condition)
         {
             //移除主键标记
-            ChangePropertys.Remove(_pid);
+            ChangePropertys.Remove(_pair_id);
             
             if (ChangePropertys.Count == 0)
             {
@@ -186,14 +187,14 @@ values(
             }
             
             StringBuilder sql = new StringBuilder();
-            sql.AppendLine("update tr_price set");
+            sql.AppendLine("update tmp_currency_pair set");
             while (ChangePropertys.MoveNext())
             {
          		sql.AppendFormat(" {0}{1}=?{1} ", (ChangePropertys.CurrentIndex == 0 ? string.Empty : ","), ChangePropertys.Current);
                 AddParameter(ChangePropertys.Current, DataRow[ChangePropertys.Current]);
             }
-            sql.AppendLine(" where pid=?pid");
-            AddParameter(_pid, DataRow[_pid]);
+            sql.AppendLine(" where pair_id=?pair_id");
+            AddParameter(_pair_id, DataRow[_pair_id]);
             if (!string.IsNullOrEmpty(condition))
                 sql.AppendLine(" and " + condition);
                 
@@ -206,35 +207,23 @@ values(
         {
             string sql = @"
 select
-  pid,
-  eid,
-  cid,
-  price,
-  createtime,
-  remark
-from tr_price
+  pair_id,
+  currency_id,
+  ex_currency_id,
+  pair_code,
+  remarks,
+  create_time
+from tmp_currency_pair
 where " + condition;
             return base.SelectBySql(sql);
         }
 
-        public bool SelectByPK(int pid)
+        public bool SelectByPK(int pairId)
         {
-            string condition = "pid=?pid";
-            AddParameter(_pid, pid);
+            string condition = "pair_id=?pair_id";
+            AddParameter(_pair_id, pairId);
             return SelectByCondition(condition);
         }
-		public Tr_Cointype Get_Tr_Cointype_ByCid()
-		{
-			Tr_Cointype da=new Tr_Cointype();
-			da.SelectByPK(Cid.Value);
-			return da;
-		}
-		public Tr_Exchange Get_Tr_Exchange_ByEid()
-		{
-			Tr_Exchange da=new Tr_Exchange();
-			da.SelectByPK(Eid.Value);
-			return da;
-		}
 
 
 
@@ -244,15 +233,15 @@ where " + condition;
     }
     
     /// <summary>
-    /// Data Access Layer Object Collection Of Tr_Price
+    /// Data Access Layer Object Collection Of Tmp_Currency_Pair
     /// </summary>
-    public partial class Tr_PriceCollection : DataAccessCollectionBase
+    public partial class Tmp_Currency_PairCollection : DataAccessCollectionBase
     {
         #region 默认构造
  
-        public Tr_PriceCollection() { }
+        public Tmp_Currency_PairCollection() { }
 
-        public Tr_PriceCollection(DataTable table)
+        public Tmp_Currency_PairCollection(DataTable table)
             : base(table) { }
             
         #endregion 默认构造
@@ -260,30 +249,30 @@ where " + condition;
         #region 私有成员
         protected override DataAccessBase GetItemByIndex(int index)
         {
-            return new Tr_Price(DataTable.Rows[index]);
+            return new Tmp_Currency_Pair(DataTable.Rows[index]);
         }
         
         protected override DataTable BuildTable()
         {
-            return new  Tr_Price().CloneSchemaOfTable();
+            return new  Tmp_Currency_Pair().CloneSchemaOfTable();
         }
         
         protected override string TableName
         {
-            get { return Tr_Price._TABLENAME; }
+            get { return Tmp_Currency_Pair._TABLENAME; }
         }
         
         protected bool ListByCondition(string condition)
         {
             string sql = @"
 select
-  pid,
-  eid,
-  cid,
-  price,
-  createtime,
-  remark
-from tr_price
+  pair_id,
+  currency_id,
+  ex_currency_id,
+  pair_code,
+  remarks,
+  create_time
+from tmp_currency_pair
 where " + condition;
             return base.ListBySql(sql);
         }
@@ -296,17 +285,17 @@ where " + condition;
         
         public bool DeleteByCondition(string condition)
         {
-            string sql = "delete from tr_price where " + condition;
+            string sql = "delete from tmp_currency_pair where " + condition;
             return DeleteBySql(sql);
         }
         #endregion
         
         #region 公开成员
-        public Tr_Price this[int index]
+        public Tmp_Currency_Pair this[int index]
         {
             get
             {
-                return new Tr_Price(DataTable.Rows[index]);
+                return new Tmp_Currency_Pair(DataTable.Rows[index]);
             }
         }
 
@@ -317,28 +306,28 @@ where " + condition;
         
         #region Linq
         
-        public Tr_Price Find(Predicate<Tr_Price> match)
+        public Tmp_Currency_Pair Find(Predicate<Tmp_Currency_Pair> match)
         {
-            foreach (Tr_Price item in this)
+            foreach (Tmp_Currency_Pair item in this)
             {
                 if (match(item))
                     return item;
             }
             return null;
         }
-        public Tr_PriceCollection FindAll(Predicate<Tr_Price> match)
+        public Tmp_Currency_PairCollection FindAll(Predicate<Tmp_Currency_Pair> match)
         {
-            Tr_PriceCollection list = new Tr_PriceCollection();
-            foreach (Tr_Price item in this)
+            Tmp_Currency_PairCollection list = new Tmp_Currency_PairCollection();
+            foreach (Tmp_Currency_Pair item in this)
             {
                 if (match(item))
                     list.Add(item);
             }
             return list;
         }
-        public bool Contains(Predicate<Tr_Price> match)
+        public bool Contains(Predicate<Tmp_Currency_Pair> match)
         {
-            foreach (Tr_Price item in this)
+            foreach (Tmp_Currency_Pair item in this)
             {
                 if (match(item))
                     return true;
@@ -346,10 +335,10 @@ where " + condition;
             return false;
         }
 
-        public bool DeleteAt(Predicate<Tr_Price> match)
+        public bool DeleteAt(Predicate<Tmp_Currency_Pair> match)
         {
             BeginTransaction();
-            foreach (Tr_Price item in this)
+            foreach (Tmp_Currency_Pair item in this)
             {
                 item.ReferenceTransactionFrom(Transaction);
                 if (!match(item))

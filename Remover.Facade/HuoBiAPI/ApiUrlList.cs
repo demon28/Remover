@@ -29,7 +29,10 @@ namespace Remover.Facade.HuoBiAPI
         /// </summary>
         public const string API_Market = "/market/tickers";
 
-      
+        /// <summary>
+        /// 市场深度
+        /// </summary>
+        public const string Api_Depth = "/market/depth";
 
 
 

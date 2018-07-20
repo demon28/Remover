@@ -7,12 +7,12 @@ using static Remover.Entities.EnumType;
 
 namespace Remover.DataAccess
 {
-    public partial class Tr_Quotes
+    public partial class Tmp_Quotes
     {
         
     }
 
-    public partial class Tr_QuotesCollection
+    public partial class Tmp_QuotesCollection
     {
         /// <summary>
         /// 前端获取最新交易数据

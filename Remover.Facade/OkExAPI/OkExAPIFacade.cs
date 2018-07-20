@@ -51,7 +51,7 @@ namespace Remover.Facade.OkExAPI
             var request = new RestRequest(url, Method.GET);
             var result = client.Execute(request);
             client.Timeout = 5000;
-            //Log.Debug($"okEx,statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content};ResponseStatus={result.ResponseStatus}");
+            //Log.Debug($"okEx,statusCode={result.StatusCode};ErrorMessage={result.ErrorMessage};Content={result.Content}");
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 Alert(result.ErrorMessage);

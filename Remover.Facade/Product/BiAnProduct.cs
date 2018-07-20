@@ -4,6 +4,7 @@ using Remover.Facade.BiAnAPI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Winner.Framework.Core.Facade;
 using Winner.Framework.Utils;
 using static Remover.Entities.EnumType;
 
@@ -85,7 +86,7 @@ namespace Remover.Facade
 
         }
 
-        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override BasePriceModel GetNowPrice(string coin,string currency)
         {
             BasePriceModel basePrice = new BasePriceModel();
             string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
@@ -100,6 +101,40 @@ namespace Remover.Facade
             basePrice.sellPice = result.askPrice;
             basePrice.price = result.lastPrice;
             return basePrice;
+        }
+
+        public override LatePriceModel GetLatestRecord(string coin, string currency)
+        {
+            LatePriceModel latePrice = new LatePriceModel();
+            string Symbol = ConvertSymbolTool.BiAnConvertSymbol(coin, currency);
+            var result = api.SendRequestContent<DepthRequest>(ApiUrlList.API_Depth, Symbol);
+            if (result == null)
+            {
+                Log.Error("币安数据为空" + coin);
+                return latePrice;
+            }
+
+            List<PriceModel> asksList = new List<PriceModel>();
+            foreach (var asksPrice in result.asks)
+            {
+                PriceModel asks = new PriceModel();
+                asks.price =Convert.ToDecimal(asksPrice[0]);
+                asks.amount = Convert.ToDecimal(asksPrice[1]);
+                asksList.Add(asks);
+            }
+
+            List<PriceModel> bidsList = new List<PriceModel>();
+            foreach (var bidsPrice in result.bids)
+            {
+                PriceModel bids = new PriceModel();
+                bids.price = Convert.ToDecimal(bidsPrice[0]);
+                bids.amount = Convert.ToDecimal(bidsPrice[1]);
+                bidsList.Add(bids);
+            }
+
+            latePrice.Asks = asksList;
+            latePrice.Bids = bidsList;
+            return latePrice;
         }
 
     }

@@ -7,12 +7,12 @@ using static Remover.Entities.EnumType;
 
 namespace Remover.DataAccess
 {
-    public partial class Tr_Platform
+    public partial class Tmp_Platform
     {
 
     }
 
-    public partial class Tr_PlatformCollection
+    public partial class Tmp_PlatformCollection
     {
         /// <summary>
         /// 根据状态进行查询

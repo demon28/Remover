@@ -26,7 +26,7 @@ namespace Remover.Facade.BiAnAPI
         /// <summary>
         /// 订单中的最佳价格/数量
         /// </summary>
-        //public const string API_BookTicket = "/api/v3/ticker/bookTicker";
+        public const string API_Depth = "/api/v1/depth";
 
         /// <summary>
         /// 币的最新价格

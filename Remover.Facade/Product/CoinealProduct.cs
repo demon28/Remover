@@ -85,9 +85,14 @@ namespace Remover.Facade.Product
             return result.data.buy;
         }
 
-        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override BasePriceModel GetNowPrice(string coin, string currency)
         {
             return new BasePriceModel();
+        }
+
+        public override LatePriceModel GetLatestRecord(string coin, string currency)
+        {
+            return new LatePriceModel();
         }
     }
 }

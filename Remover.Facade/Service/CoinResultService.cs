@@ -23,33 +23,23 @@ namespace Remover.Facade.Service
             Log.Info("-----------------开始执行RunGetCoinPrice-------------------");
             try
             {
-                Tr_PlatformCollection platformColl = new Tr_PlatformCollection();
-                if (!platformColl.ListBuyStatus())
+                Vmp_ConfigCollection coinCoinfig = new Vmp_ConfigCollection();
+                if (!coinCoinfig.ListCoinfig())
                 {
-                    Log.Info("未查询到Platform");
+                    Log.Info("未查询到coinCoinfig");
                     return false;
                 }
-
-                Tr_CointypeCollection cointypeColl = new Tr_CointypeCollection();
-                if (!cointypeColl.ListBuyStatus())
-                {
-                    Log.Info("未查询到Cointype");
-                    return false;
-                }
+                
                 List<Task> tasks = new List<Task>();
 
                 //循环平台
-                foreach (Tr_Platform item in platformColl)
+                foreach (Vmp_Config item in coinCoinfig)
                 {
-                    //循环插入币种
-                    foreach (Tr_Cointype coin in cointypeColl)
+                    tasks.Add(Task.Factory.StartNew(() =>
                     {
-                        tasks.Add(Task.Factory.StartNew(() =>
-                        {
-                            AddQuotes jobServcie = new AddQuotes();
-                            jobServcie.TaskExecution(item.PlatformId, coin.Cid, item.PlatformCode, coin.CoinCode);
-                        }));
-                    }
+                        AddQuotes jobServcie = new AddQuotes();
+                        jobServcie.TaskExecution(item.PlatformId, item.CurrencyId, item.ExCurrencyId, item.ExCurrencyCode, item.PlatformCode, item.CurrencyCode);
+                    }));
                 }
                 Task.WaitAll(tasks.ToArray());
             }

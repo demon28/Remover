@@ -27,14 +27,14 @@ namespace Remover.Facade
         /// <param name="coin"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        public abstract BasePriceModel GetNowPrice(string coin, CurrencyType currency = CurrencyType.USDT);
+        public abstract BasePriceModel GetNowPrice(string coin, string currency);
 
         /// <summary>
         /// 获取交易所名称
         /// </summary>
         /// <returns></returns>
         public abstract string GetExchangeName();
-
+        
 
         /// <summary>
         /// 获取交易所所有币价
@@ -57,5 +57,11 @@ namespace Remover.Facade
             Log.Info("GET PRICE FINIESHED:" + GetExchangeName());
             return res;
         }
+
+        /// <summary>
+        /// 获取交易深度 
+        /// </summary>
+        /// <returns></returns>
+        public abstract LatePriceModel GetLatestRecord(string coin, string currency);
     }
 }

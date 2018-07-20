@@ -110,10 +110,11 @@ namespace Remover.Facade
             }
         }
 
-        public override BasePriceModel GetNowPrice(string coin, EnumType.CurrencyType currency = EnumType.CurrencyType.USDT)
+        public override BasePriceModel GetNowPrice(string coin, string currency)
         {
             BasePriceModel basePrice = new BasePriceModel();
             string Symbol = ConvertSymbolTool.HBConvertSymbol(coin, currency);
+
             var result = api.SendRequestContent<TicketRequest>(ApiUrlList.API_Ticker, Symbol);
             if(result.status!="ok")
             {
@@ -128,6 +129,47 @@ namespace Remover.Facade
             basePrice.sellPice = result.tick.ask[0];
             basePrice.price = result.tick.close;
             return basePrice;
+        }
+
+        /// <summary>
+        /// 获取市场深度
+        /// </summary>
+        /// <param name="coin"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        public override LatePriceModel GetLatestRecord(string coin, string currency)
+        {
+            LatePriceModel latePrice = new LatePriceModel();
+            string Symbol = ConvertSymbolTool.HBConvertSymbol(coin, currency);
+            Symbol += "&type=step0";
+            var result = api.SendRequestContent<DepthRequest>(ApiUrlList.Api_Depth, Symbol);
+
+            if (result == null)
+            {
+                Log.Error("火币数据为空" + coin);
+                return latePrice;
+            }
+            List<PriceModel> asksList = new List<PriceModel>();
+            foreach (var asksPrice in result.tick.asks)
+            {
+                PriceModel asks = new PriceModel();
+                asks.price = asksPrice[0];
+                asks.amount = asksPrice[1];
+                asksList.Add(asks);
+            }
+
+            List<PriceModel> bidsList = new List<PriceModel>();
+            foreach (var bidsPrice in result.tick.bids)
+            {
+                PriceModel bids = new PriceModel();
+                bids.price = bidsPrice[0];
+                bids.amount = bidsPrice[1];
+                bidsList.Add(bids);
+            }
+
+            latePrice.Asks = asksList;
+            latePrice.Bids = bidsList;
+            return latePrice;
         }
     }
 }

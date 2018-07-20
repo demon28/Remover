@@ -21,5 +21,10 @@ namespace Remover.Facade.ZBAPI
         /// 所有币价
         /// </summary>
         public const string API_Market = "/data/v1/allTicker";
+
+        /// <summary>
+        /// 交易深度
+        /// </summary>
+        public const string API_Depth = "/data/v1/depth";
     }
 }

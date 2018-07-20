@@ -79,7 +79,7 @@ namespace Remover.Facade.HuoBiAPI
         /// <param name="resourcePath"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public T SendRequestContent<T>(string resourcePath, string parameters = "") where T : new()
+        public T SendRequestContent<T>(string resourcePath, string parameters = "") where T : class
         {
             
             parameters = UrlHelper.UriEncodeParameterValue(GetCommonParameters() + parameters);//请求参数
