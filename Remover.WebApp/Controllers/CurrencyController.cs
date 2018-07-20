@@ -22,7 +22,7 @@ namespace Remover.WebApp.Controllers
         [HttpPost]
         public ActionResult ListCurrency()
         {
-            Tr_QuotesCollection quotes = new Tr_QuotesCollection();
+            Tmp_QuotesCollection quotes = new Tmp_QuotesCollection();
             quotes.ListByCurrents();
 
 

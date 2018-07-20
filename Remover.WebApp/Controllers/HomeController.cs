@@ -20,7 +20,7 @@ namespace Remover.WebApp.Controllers
         [HttpPost]
         public ActionResult ListCurrency()
         {
-            Tr_QuotesCollection quotesCollection = new Tr_QuotesCollection();
+            Tmp_QuotesCollection quotesCollection = new Tmp_QuotesCollection();
             Log.Info("---------调用查询开始-----------");
             quotesCollection.ListByCurrents();
             Log.Info("---------调用查询结束-----------");
