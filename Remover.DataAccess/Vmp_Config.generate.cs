@@ -27,7 +27,19 @@ namespace Remover.DataAccess
     /// </summary>
     public partial class Vmp_Config : DataAccessBase
     {
-        
+        /// <summary>
+        /// 根据平台名称和交易对获取
+        /// </summary>
+        /// <param name="platfromCode"></param>
+        /// <param name="pairMark"></param>
+        /// <returns></returns>
+        public bool GetByPlatformPair(string platfromCode,string pairMark)
+        {
+            string sql= " platform_code =?platfromCode and mark =?pairMark";
+            AddParameter("platfromCode", platfromCode);
+            AddParameter("pairMark", pairMark);
+            return SelectByCondition(sql);
+        }
         //提示：此类由代码生成器生成，如无特殊情况请不要更改。如要扩展请在外部同名类中扩展
     }
     

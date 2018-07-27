@@ -81,6 +81,7 @@
     <Compile Include="BiAnRequestModel\DepthRequest.cs" />
     <Compile Include="BiAnRequestModel\PriceRequest.cs" />
     <Compile Include="BiAnRequestModel\TicketRequest.cs" />
+    <Compile Include="CacheConfig.cs" />
     <Compile Include="CoinealRequestModel\MarketRequestModel.cs" />
     <Compile Include="CoinealRequestModel\TicketRequest.cs" />
     <Compile Include="ConvertSymbolTool.cs" />
@@ -91,14 +92,18 @@
     <Compile Include="GateRequestModel\DepthRequest.cs" />
     <Compile Include="GateRequestModel\TicketRequest.cs" />
     <Compile Include="HBRequestModel\DepthRequest.cs" />
+    <Compile Include="HBRequestModel\DepthWSRequest.cs" />
     <Compile Include="HBRequestModel\MarketRequestModel.cs" />
     <Compile Include="HBRequestModel\TicketRequest.cs" />
+    <Compile Include="CacheModel\LatePriceCacheBase.cs" />
     <Compile Include="LatePriceModel.cs" />
     <Compile Include="OKRequestModel\DepthRequest.cs" />
     <Compile Include="OKRequestModel\MarketRequestModel.cs" />
     <Compile Include="OKRequestModel\TicketRequset.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringProcess.cs" />
     <Compile Include="UrlHelper.cs" />
+    <Compile Include="VmpConfigModel.cs" />
     <Compile Include="ZBRequsetModel\DepthRequest.cs" />
     <Compile Include="ZBRequsetModel\MarketRequsetModel.cs" />
     <Compile Include="ZBRequsetModel\TicketRequest.cs" />

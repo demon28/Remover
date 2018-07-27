@@ -9,7 +9,7 @@
 * Blog : http://www.cnblogs.com/fineblog/
 * Company ：深圳乾海盛斯塔克科技有限公司
 * Copyright (C) Winner研发中心
-* CreateTime : 2018-07-20 15:10:21  
+* CreateTime : 2018-07-27 17:47:38  
 * 
 ***************************************************/
 using System;
@@ -40,6 +40,7 @@ namespace Remover.DataAccess
         
 		public const string _platform_id="platform_id";
 		public const string _platform_code="platform_code";
+		public const string _platform_name="platform_name";
 		public const string _currency_id="currency_id";
 		public const string _currency_code="currency_code";
 		public const string _ex_currency_id="ex_currency_id";
@@ -47,6 +48,8 @@ namespace Remover.DataAccess
 		public const string _status="status";
 		public const string _pair_id="pair_id";
 		public const string _pair_code="pair_code";
+		public const string _config_id="config_id";
+		public const string _mark="mark";
 
     
         public const string _TABLENAME="vmp_config";
@@ -69,6 +72,14 @@ namespace Remover.DataAccess
 		{
 			get { return getProperty<string>(_platform_code); }
 			set { setProperty(_platform_code,value); }
+		}
+		/// <summary>
+		/// [default:string.Empty]
+		/// </summary>
+		public string PlatformName
+		{
+			get { return getProperty<string>(_platform_name); }
+			set { setProperty(_platform_name,value); }
 		}
 		/// <summary>
 		/// [default:0]
@@ -126,6 +137,22 @@ namespace Remover.DataAccess
 			get { return getProperty<string>(_pair_code); }
 			set { setProperty(_pair_code,value); }
 		}
+		/// <summary>
+		/// [default:0]
+		/// </summary>
+		public int ConfigId
+		{
+			get { return getProperty<int>(_config_id); }
+			set { setProperty(_config_id,value); }
+		}
+		/// <summary>
+		/// [default:string.Empty]
+		/// </summary>
+		public string Mark
+		{
+			get { return getProperty<string>(_mark); }
+			set { setProperty(_mark,value); }
+		}
 
         #endregion 公开属性
         
@@ -141,6 +168,7 @@ namespace Remover.DataAccess
             DataTable dt = new DataTable(_TABLENAME);
 			dt.Columns.Add(_platform_id, typeof(int)).DefaultValue = 0;
 			dt.Columns.Add(_platform_code, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_platform_name, typeof(string)).DefaultValue = string.Empty;
 			dt.Columns.Add(_currency_id, typeof(int)).DefaultValue = 0;
 			dt.Columns.Add(_currency_code, typeof(string)).DefaultValue = string.Empty;
 			dt.Columns.Add(_ex_currency_id, typeof(int)).DefaultValue = 0;
@@ -148,6 +176,8 @@ namespace Remover.DataAccess
 			dt.Columns.Add(_status, typeof(int)).DefaultValue = 0;
 			dt.Columns.Add(_pair_id, typeof(int)).DefaultValue = 0;
 			dt.Columns.Add(_pair_code, typeof(string)).DefaultValue = string.Empty;
+			dt.Columns.Add(_config_id, typeof(int)).DefaultValue = 0;
+			dt.Columns.Add(_mark, typeof(string)).DefaultValue = string.Empty;
 
             return dt.NewRow();
         }
@@ -182,25 +212,32 @@ string sql=@"insert into
 vmp_config(
   platform_id,
   platform_code,
+  platform_name,
   currency_id,
   currency_code,
   ex_currency_id,
   ex_currency_code,
   status,
   pair_id,
-  pair_code)
+  pair_code,
+  config_id,
+  mark)
 values(
   ?platform_id,
   ?platform_code,
+  ?platform_name,
   ?currency_id,
   ?currency_code,
   ?ex_currency_id,
   ?ex_currency_code,
   ?status,
   ?pair_id,
-  ?pair_code)";
+  ?pair_code,
+  ?config_id,
+  ?mark)";
 			AddParameter(_platform_id,DataRow[_platform_id]);
 			AddParameter(_platform_code,DataRow[_platform_code]);
+			AddParameter(_platform_name,DataRow[_platform_name]);
 			AddParameter(_currency_id,DataRow[_currency_id]);
 			AddParameter(_currency_code,DataRow[_currency_code]);
 			AddParameter(_ex_currency_id,DataRow[_ex_currency_id]);
@@ -208,6 +245,8 @@ values(
 			AddParameter(_status,DataRow[_status]);
 			AddParameter(_pair_id,DataRow[_pair_id]);
 			AddParameter(_pair_code,DataRow[_pair_code]);
+			AddParameter(_config_id,DataRow[_config_id]);
+			AddParameter(_mark,DataRow[_mark]);
 			int @id;
 			bool result=InsertBySql(sql,out @id);
 			PlatformId = @id;
@@ -253,13 +292,16 @@ values(
 select
   platform_id,
   platform_code,
+  platform_name,
   currency_id,
   currency_code,
   ex_currency_id,
   ex_currency_code,
   status,
   pair_id,
-  pair_code
+  pair_code,
+  config_id,
+  mark
 from vmp_config
 where " + condition;
             return base.SelectBySql(sql);
@@ -315,13 +357,16 @@ where " + condition;
 select
   platform_id,
   platform_code,
+  platform_name,
   currency_id,
   currency_code,
   ex_currency_id,
   ex_currency_code,
   status,
   pair_id,
-  pair_code
+  pair_code,
+  config_id,
+  mark
 from vmp_config
 where " + condition;
             return base.ListBySql(sql);

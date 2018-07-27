@@ -159,9 +159,6 @@
     <Reference Include="Winner.User.Interface, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Winner.User.Interface.1.0.8\lib\net40\Winner.User.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="Winner.User.Provider, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Winner.User.Provider.1.0.8\lib\net46\Winner.User.Provider.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ApplicationInsights">

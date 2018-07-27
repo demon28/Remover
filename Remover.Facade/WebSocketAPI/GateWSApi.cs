@@ -1,4 +1,5 @@
-﻿using SuperSocket.ClientEngine;
+﻿using Remover.Facade.WebSocket;
+using SuperSocket.ClientEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Remover.Facade.WebSocketAPI
         /// <summary>
         /// 接收WebScoket消息事件
         /// </summary>
-        public static event EventHandler<HuoBiMessageReceivedEventArgs> OnMessage;
+        public static event EventHandler<GateMessageReceivedEventArgs> OnMessage;
         /// <summary>
         /// 初始化WebSocket
         /// </summary>
@@ -77,16 +78,16 @@ namespace Remover.Facade.WebSocketAPI
         /// <param name="args"></param>
         public static void ReceviedMsg(object sender, DataReceivedEventArgs args)
         {
-            //var msg = args.Data;
-            //if (msg.IndexOf("ping") != -1) //响应心跳包
-            //{
-            //    var reponseData = msg.Replace("ping", "pong");
-            //    websocket.Send(reponseData);
-            //}
-            //else//接收消息
-            //{
-            //    OnMessage?.Invoke(null, new HuoBiMessageReceivedEventArgs(msg));
-            //}
+            var msg = GZipHelper.GZipDecompressString(args.Data);
+            if (msg.IndexOf("ping") != -1) //响应心跳包
+            {
+                var reponseData = msg.Replace("ping", "pong");
+                websocket.Send(reponseData);
+            }
+            else//接收消息
+            {
+                OnMessage?.Invoke(null, new GateMessageReceivedEventArgs(msg));
+            }
 
         }
         #endregion

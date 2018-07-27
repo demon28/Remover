@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebSocket4Net;
+using Remover.Facade.WebScoketEvent;
+using Winner.Framework.Utils;
 
 namespace Remover.Facade.WebSocketAPI
 {
@@ -14,7 +16,7 @@ namespace Remover.Facade.WebSocketAPI
         private static WebSocket4Net.WebSocket websocket;
         private static Dictionary<string, string> topicDic = new Dictionary<string, string>();
         private static bool isOpened = false;
-        private const string HUOBI_WEBSOCKET_API = "wss://api.huobi.pro/ws";
+        private const string HUOBI_WEBSOCKET_API = "wss://api.huobi.br.com/ws";
         #endregion
         #region  市场信息常量
         public const string MARKET_KLINE = "market.{0}.kline.{1}";
@@ -35,23 +37,26 @@ namespace Remover.Facade.WebSocketAPI
             try
             {
                 websocket = new WebSocket4Net.WebSocket(HUOBI_WEBSOCKET_API);
-
                 websocket.Error += (sender, e) =>
                 {
-                    Console.WriteLine("Error:" + e.Exception.Message.ToString());
+                    Log.Error("WebsocketError:" + e.Exception.Message.ToString());
                 };
                 websocket.DataReceived += ReceviedMsg;
                 websocket.Opened += OnOpened;
                 websocket.Open();
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception:" + ex.Message);
+                Log.Error("Exception:" + ex);
             }
             return true;
         }
 
+        public static void OnClose()
+        {
+            isOpened = false;
+            websocket.Dispose();
+        }
 
         #region Opened&心跳响应&触发消息事件
         /// <summary>
@@ -61,13 +66,12 @@ namespace Remover.Facade.WebSocketAPI
         /// <param name="e"></param>
         public static void OnOpened(object sender, EventArgs e)
         {
-            Console.WriteLine($"OnOpened Topics Count:{topicDic.Count}");
+            Log.Info($"OnOpened Topics Count:{topicDic.Count}");
             isOpened = true;
             foreach (var item in topicDic)
             {
                 SendSubscribeTopic(item.Value);
             }
-
         }
 
         /// <summary>
@@ -78,20 +82,23 @@ namespace Remover.Facade.WebSocketAPI
         public static void ReceviedMsg(object sender, DataReceivedEventArgs args)
         {
             var msg = GZipHelper.GZipDecompressString(args.Data);
+            
             if (msg.IndexOf("ping") != -1) //响应心跳包
             {
+                Log.Info("响应心跳" + msg);
                 var reponseData = msg.Replace("ping", "pong");
                 websocket.Send(reponseData);
             }
             else//接收消息
             {
+                //Log.Info("接收消息1" + msg);
+                //var e =new HuoBiMessageReceivedEventArgs(msg);
+                //e.MsgPackage(msg);
                 OnMessage?.Invoke(null, new HuoBiMessageReceivedEventArgs(msg));
             }
-
         }
         #endregion
-
-
+        
         #region 订阅相关
         /// <summary>
         /// 订阅
@@ -109,14 +116,12 @@ namespace Remover.Facade.WebSocketAPI
                 SendSubscribeTopic(msg);
             }
         }
-
-
+        
         /// <summary>
         /// 取消订阅
         /// </summary>
         /// <param name="topic"></param>
         /// <param name="id"></param>
-
         public static void UnSubscribe(string topic, string id)
         {
             if (!topicDic.ContainsKey(topic) || !isOpened)
@@ -124,26 +129,23 @@ namespace Remover.Facade.WebSocketAPI
             var msg = $"{{\"unsub\":\"{topic}\",\"id\":\"{id}\"}}";
             topicDic.Remove(topic);
             SendSubscribeTopic(msg);
-            Console.WriteLine($"UnSubscribed, Topics Count:{topicDic.Count}");
-
+            Log.Info($"UnSubscribed, Topics Count:{topicDic.Count}");
         }
         private static void SendSubscribeTopic(string msg)
         {
             websocket.Send(msg);
-            Console.WriteLine(msg);
+            Log.Info("发送的值:"+msg);
         }
         #endregion
     }
-    /// <summary>
-    /// 事件内容
-    /// </summary>
     public class HuoBiMessageReceivedEventArgs : EventArgs
     {
+        public string Message { get; set; }
         public HuoBiMessageReceivedEventArgs(string message)
         {
             this.Message = message;
+            //Log.Info("接收消息2" + message);
         }
-
-        public string Message { get; set; }
     }
+
 }

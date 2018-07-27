@@ -24,21 +24,23 @@ namespace Remover.Facade.Service
             try
             {
                 Vmp_ConfigCollection coinCoinfig = new Vmp_ConfigCollection();
-                if (!coinCoinfig.ListCoinfig())
+                if (!coinCoinfig.ListByPlatformCode("Coin"))
                 {
                     Log.Info("未查询到coinCoinfig");
                     return false;
                 }
-                
+                List<VmpConfigModel> list = new List<VmpConfigModel>();
+                list = MapProvider.Map<VmpConfigModel>(coinCoinfig.DataTable);
+
                 List<Task> tasks = new List<Task>();
 
-                //循环平台
-                foreach (Vmp_Config item in coinCoinfig)
+                //循环配置表
+                foreach (VmpConfigModel item in list)
                 {
                     tasks.Add(Task.Factory.StartNew(() =>
                     {
-                        AddQuotes jobServcie = new AddQuotes();
-                        jobServcie.TaskExecution(item.PlatformId, item.CurrencyId, item.ExCurrencyId, item.ExCurrencyCode, item.PlatformCode, item.CurrencyCode);
+                        AddLatePrice jobServcie = new AddLatePrice();
+                        jobServcie.TaskExecution(item);
                     }));
                 }
                 Task.WaitAll(tasks.ToArray());

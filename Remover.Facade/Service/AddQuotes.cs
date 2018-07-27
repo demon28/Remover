@@ -12,6 +12,15 @@ namespace Remover.Facade.Service
 {
     public class AddQuotes
     {
+        /// <summary>
+        /// 更新24小时市场价,废弃
+        /// </summary>
+        /// <param name="platformId"></param>
+        /// <param name="coinId"></param>
+        /// <param name="exchangeId"></param>
+        /// <param name="exName"></param>
+        /// <param name="platformCode"></param>
+        /// <param name="coinCode"></param>
         public void TaskExecution(int platformId, int coinId,int exchangeId,string exName, string platformCode, string coinCode)
         {
             Log.Info("执行TaskExecution：" + platformCode + "_" + coinCode + "_"+ exName);

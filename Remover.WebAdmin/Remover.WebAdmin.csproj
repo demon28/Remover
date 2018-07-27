@@ -1,0 +1,352 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2295B8C1-D934-4D81-B771-87AD972A5E0F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Remover.WebAdmin</RootNamespace>
+    <AssemblyName>Remover.WebAdmin</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Javirs.Common, Version=2.6.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Javirs.Common.2.6.21\lib\net40\Javirs.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\winner.log.1.0.0\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data">
+      <HintPath>D:\Documents\桌面\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Winner.Framework.Core">
+      <HintPath>D:\Documents\桌面\核心框架\Winner.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Winner.Framework.Encrypt">
+      <HintPath>D:\Documents\桌面\核心框架\Winner.Framework.Encrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="Winner.Framework.MVC, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Winner.Framework.MVC.2.0.7\lib\net40\Winner.Framework.MVC.dll</HintPath>
+    </Reference>
+    <Reference Include="Winner.Framework.Utils">
+      <HintPath>D:\Documents\桌面\核心框架\Winner.Framework.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Winner.Mvc.Audit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Winner.Mvc.Audit.1.0.0\lib\Winner.Mvc.Audit.dll</HintPath>
+    </Reference>
+    <Reference Include="Winner.Platform.MVC, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Winner.Platform.MVC.1.1.1\lib\net40\Winner.Platform.MVC.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\assets\avatars\user.jpg" />
+    <Content Include="Content\assets\css\ace-fonts.css" />
+    <Content Include="Content\assets\css\ace-ie.css" />
+    <Content Include="Content\assets\css\ace-part2.css" />
+    <Content Include="Content\assets\css\ace-rtl.css" />
+    <Content Include="Content\assets\css\ace-skins.css" />
+    <Content Include="Content\assets\css\ace.css" />
+    <Content Include="Content\assets\css\ace.onpage-help.css" />
+    <Content Include="Content\assets\css\bootstrap.css" />
+    <Content Include="Content\assets\css\pace.css" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\assets\js\ace-elements.js" />
+    <Content Include="Content\assets\js\ace-extra.js" />
+    <Content Include="Content\assets\js\ace-require.js" />
+    <Content Include="Content\assets\js\ace-small.js" />
+    <Content Include="Content\assets\js\ace.js" />
+    <Content Include="Content\assets\js\src\ace.ajax-content.js" />
+    <Content Include="Content\assets\js\src\ace.auto-container.js" />
+    <Content Include="Content\assets\js\src\ace.auto-padding.js" />
+    <Content Include="Content\assets\js\src\ace.basics.js" />
+    <Content Include="Content\assets\js\src\ace.js" />
+    <Content Include="Content\assets\js\src\ace.onpage-help.js" />
+    <Content Include="Content\assets\js\src\ace.scrolltop.js" />
+    <Content Include="Content\assets\js\src\ace.searchbox-autocomplete.js" />
+    <Content Include="Content\assets\js\src\ace.settings-rtl.js" />
+    <Content Include="Content\assets\js\src\ace.settings-skin.js" />
+    <Content Include="Content\assets\js\src\ace.settings.js" />
+    <Content Include="Content\assets\js\src\ace.sidebar-scroll-1.js" />
+    <Content Include="Content\assets\js\src\ace.sidebar-scroll-2.js" />
+    <Content Include="Content\assets\js\src\ace.sidebar.js" />
+    <Content Include="Content\assets\js\src\ace.submenu-hover.js" />
+    <Content Include="Content\assets\js\src\ace.touch-drag.js" />
+    <Content Include="Content\assets\js\src\ace.widget-box.js" />
+    <Content Include="Content\assets\js\src\ace.widget-on-reload.js" />
+    <Content Include="Content\assets\js\src\elements.aside.js" />
+    <Content Include="Content\assets\js\src\elements.colorpicker.js" />
+    <Content Include="Content\assets\js\src\elements.fileinput.js" />
+    <Content Include="Content\assets\js\src\elements.onpage-help.js" />
+    <Content Include="Content\assets\js\src\elements.scroller.js" />
+    <Content Include="Content\assets\js\src\elements.spinner.js" />
+    <Content Include="Content\assets\js\src\elements.treeview.js" />
+    <Content Include="Content\assets\js\src\elements.typeahead.js" />
+    <Content Include="Content\assets\js\src\elements.wizard.js" />
+    <Content Include="Content\assets\js\src\elements.wysiwyg.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\components\bootbox.js\bootbox.js" />
+    <Content Include="Content\components\bootbox.js\bootbox.min.js" />
+    <Content Include="Content\components\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Content\components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.colVis.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.flash.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.html5.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\buttons.print.min.js" />
+    <Content Include="Content\components\datatables.net-buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Content\components\datatables.net-select\js\dataTables.select.js" />
+    <Content Include="Content\components\datatables.net-select\js\dataTables.select.min.js" />
+    <Content Include="Content\components\datatables\media\js\jquery.dataTables.js" />
+    <Content Include="Content\components\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\components\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\components\jquery\dist\jquery.js" />
+    <Content Include="Content\components\_mod\datatables\jquery.dataTables.bootstrap.js" />
+    <Content Include="Content\components\_mod\datatables\jquery.dataTables.bootstrap.min.js" />
+    <Content Include="Content\Scripts\bootbox.min.js" />
+    <Content Include="Content\Scripts\bootstrap.js" />
+    <Content Include="Content\Scripts\bootstrap.min.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.messages_cn.js" />
+    <Content Include="Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\jQuery.validator.extend.js" />
+    <Content Include="Content\Scripts\jquery.winner.plugins.js" />
+    <Content Include="Content\Scripts\knockout-2.2.0.js" />
+    <Content Include="Content\Scripts\ko-pager.js" />
+    <Content Include="Content\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Content\Scripts\shear\hammer.min.js" />
+    <Content Include="Content\Scripts\shear\iscroll-zoom.min.js" />
+    <Content Include="Content\Scripts\shear\photoClip.min.js" />
+    <Content Include="Content\Scripts\upload.js" />
+    <Content Include="Content\Scripts\wui\template\wui.alert.html" />
+    <Content Include="Content\Scripts\wui\template\wui.combobox-2.0.html" />
+    <Content Include="Content\Scripts\wui\template\wui.combobox.html" />
+    <Content Include="Content\Scripts\wui\template\wui.flyout.iframe.html" />
+    <Content Include="Content\Scripts\wui\template\wui.win.html" />
+    <Content Include="Content\Scripts\wui\wui.min.js" />
+    <None Include="Content\Scripts\_references.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\winner\winner.bootstrap.changePage.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
+    <Compile Include="Controllers\CurrencyPairController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlatformController.cs" />
+    <Compile Include="Controllers\SymbolConfigController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mvc\AdminWebViewPage.cs" />
+    <Compile Include="Models\Mvc\DefaultActionAttribute.cs" />
+    <Compile Include="Models\Mvc\WorkContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\assets\fonts\OpenSans-300.woff" />
+    <Content Include="Content\assets\fonts\OpenSans-400.woff" />
+    <Content Include="Content\assets\fonts\readme" />
+    <Content Include="Content\assets\js\src\readme" />
+    <Content Include="Content\assets\js\src\scripts.json" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\components\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
+    <Content Include="log4net.config" />
+    <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
+    <Content Include="Views\CurrencyPair\Index.cshtml" />
+    <Content Include="Views\Currency\Index.cshtml" />
+    <Content Include="Views\Platform\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\SymbolConfig\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Remover.DataAccess\Remover.DataAccess.csproj">
+      <Project>{850a3134-73d0-457f-9c98-bfc258b9ad52}</Project>
+      <Name>Remover.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Remover.Entities\Remover.Entities.csproj">
+      <Project>{137e1157-be75-435b-87c6-b0593db1561c}</Project>
+      <Name>Remover.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Remover.Facade\Remover.Facade.csproj">
+      <Project>{79bc171f-3a4d-491b-b318-ef50b403a373}</Project>
+      <Name>Remover.Facade</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55340</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55340/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

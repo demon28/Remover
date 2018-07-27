@@ -24,6 +24,23 @@ namespace Remover.DataAccess
             AddParameter("STATUS", (int)PlatformStatus.展示);
             return ListByCondition(sql);
         }
+
+        /// <summary>
+        /// 根据名称查询
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public bool ListByKeyWord(string keyword)
+        {
+            string sql = "1=1";
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                sql = " PLATFORM_NAME=?keyword";
+                AddParameter("keyword", keyword);
+            }
+            return ListByCondition(sql);
+        }
+
     }
 
 }

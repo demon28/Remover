@@ -35,6 +35,7 @@ namespace Remover.DataAccess
             AddParameter("exchangeId", exchangeId);
             return SelectByCondition(sql);
         }
+        
         //提示：此类由代码生成器生成，如无特殊情况请不要更改。如要扩展请在外部同名类中扩展
     }
     

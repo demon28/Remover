@@ -1,4 +1,5 @@
 ﻿using Remover.DataAccess;
+using Remover.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +24,18 @@ namespace Remover.Facade.Service
                     Log.Info("未查询到coinfig");
                     return false;
                 }
+                List<VmpConfigModel> list = new List<VmpConfigModel>();
+                list = MapProvider.Map<VmpConfigModel>(coinfig.DataTable);
 
                 List<Task> tasks = new List<Task>();
 
-                //循环平台
-                foreach (Vmp_Config item in coinfig)
+                //循环配置表
+                foreach (VmpConfigModel item in list)
                 {
                     tasks.Add(Task.Factory.StartNew(() =>
                     {
                         AddLatePrice jobServcie = new AddLatePrice();
-                        jobServcie.TaskExecution(item.PlatformId, item.PlatformCode, item.CurrencyId, item.CurrencyCode, item.ExCurrencyId, item.ExCurrencyCode);
+                        jobServcie.TaskExecution(item);
                     }));
                 }
                 Task.WaitAll(tasks.ToArray());

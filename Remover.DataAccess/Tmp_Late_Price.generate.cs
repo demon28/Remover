@@ -28,6 +28,14 @@ namespace Remover.DataAccess
     /// </summary>
     public partial class Tmp_Late_Price : DataAccessBase
     {
+        public int? IsExistencePrice(int platform, int pairId)
+        {
+            string sql= "select count(0) from tmp_late_price where platform_id=?platform and pair_id=?pairId";
+            AddParameter("platform", platform);
+            AddParameter("pairId", pairId);
+            return GetIntValue(sql);
+        }
+
         //提示：此类由代码生成器生成，如无特殊情况请不要更改。如要扩展请在外部同名类中扩展
     }
     
@@ -43,6 +51,13 @@ namespace Remover.DataAccess
             AddParameter("pairId", pairId);
             return DeleteBySql(sql);
         }
+
+        public bool DelByTime()
+        {
+            string sql = "delete From tmp_late_price where DATE(late_time) <= DATE(DATE_SUB(NOW(), INTERVAL 5 MINUTE))";
+            return DeleteBySql(sql);
+        }
+
         //提示：此类由代码生成器生成，如无特殊情况请不要更改。如要扩展请在外部同名类中扩展
     }
 } 

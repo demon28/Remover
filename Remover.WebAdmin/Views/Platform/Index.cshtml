@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "交易平台列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section breadcrumb{
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="/Home">首页</a>
+            </li>
+            <li>
+                <a href="/Platform">配置管理</a>
+            </li>
+            <li class="active">交易平台列表</li>
+        </ul>
+    </div>
+}
+
+<div class="page-header">
+    <h1>
+        配置管理
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            交易平台列表
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <input type="text" class="col-xs-5 col-sm-3" id="KeyWord" name="KeyWord" placeholder="支持货币名称、货币编号模糊查询">&nbsp;
+            @*开通状态 @Html.DropDownList("CurrencyStatus", new SelectList(ViewBag.Currency_Status, "Value", "Text")) &nbsp;*@
+            <button class="btn btn-purple btn-sm" type="button" onclick="reload();" id="btnSearch">
+                搜索
+                <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
+            </button>
+            <button class="btn btn-sm btn-primary" type="button" onclick="addCurrency();">
+                新增平台
+                <i class="glyphicon glyphicon-plus bigger-110"></i>
+            </button>
+        </div>
+        <table id="His-Table" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>平台名称</th>
+                    <th>平台缩写</th>
+                    <th>状态</th>
+                    <th>平台地址</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:Data">
+                <tr>
+                    <td data-bind="text:platform_id"></td>
+                    <td data-bind="text:platform_name"></td>
+                    <td data-bind="text:platform_code"></td>
+                    <td data-bind="text:status"></td>
+                    <td data-bind="text:url"></td>
+                    <td data-bind="text:create_time"></td>
+                    <td>
+                        <div class="hidden-sm hidden-xs btn-group">
+                            <button class="btn btn-xs btn-info" data-bind="event:{click:$root.ClickEdit}">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="view-tip"></div>
+        <ul class="pagination goods_view_page"></ul><!--分页-->
+
+        <div class="row modal-row">
+            <div class="modal fade" tabindex="-1" id="modal-table-edit" style="display: none;z-index:99999" aria-hidden="true">
+                <div class="modal-dialog" style="padding-top:100px;">
+                    <div class="modal-content">
+                        <form id="form_id" name="form_id" enctype="multipart/form-data">
+                            <div class="modal-header no-padding">
+                                <div class="table-header">
+                                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+                                        <span class="white">×</span>
+                                    </button>
+                                    <span>操作</span>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <input type="hidden" id="hidden_file" name="hidden_file" value="" />
+                                    <input type="hidden" id="hidden_id" name="hidden_id" value="" />
+                                    <div class="col-xs-12">
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            <label>币种ID</label>
+                                            <div>
+                                                <input class="form-control" id="txt_walletId" name="txt_walletId" placeholder="请填写钱包关联的ID" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>币种名称</label>
+                                            <div>
+                                                <input class="form-control" id="txt_crurrencyName" name="txt_crurrencyName" placeholder="请填写币种名称" />
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            <label>货币缩写</label>
+                                            <div>
+                                                <input class="form-control" id="txt_currencyCode" name="txt_currencyCode" placeholder="请填写货币缩写" />
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            <label>原始价</label>
+                                            <div>
+                                                <input class="form-control" id="txt_originalPrice" name="txt_originalPrice" placeholder="1" />
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <label>开盘时间</label>
+                                        <div class="input-group">
+                                            <input id="date-timepicker1" type="text" name="date-timepicker1" class="form-control">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-clock-o bigger-110"></i>
+                                            </span>
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            <label>状态</label>
+                                            @*@Html.DropDownList("CurrencyStatusF", new SelectList(ViewBag.Currency_StatusF, "Value", "Text"), new { @class = "form-control" })*@
+                                        </div>
+                                        <div class="space-4"></div>
+                                        <div class="form-group">
+                                            <label>LOGO</label>
+                                            <div class="col-xs-12">
+                                                <div>
+                                                    <input id="file_image" type="file" name="file_image" onclick="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer no-margin-top">
+                                <button class="btn btn-sm" data-dismiss="modal">
+                                    <i class="icon-remove"></i>返回
+                                </button>
+                                <button class="btn btn-sm btn-primary" id="btn_submit" type="button" onclick="submitFroms()" name="">
+                                    <i class="icon-ok"></i>提交
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!--弹出 Modal Box 新增-->
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/winner/winner.bootstrap.changePage.js"></script>
+    <script type="text/javascript">
+        var _url_index = "/Platform/ListPlatform";
+        jQuery(function ($) {
+            initView();
+        });
+
+        function reload() {
+            $(".pagination").jqPaginator("reload");
+        }
+
+        function initView() {
+            $(".pagination").jqPaginator({
+                url: _url_index,
+                eleid: "His-Table",
+                tip: ".view-tip",
+                totalCounts: 1,
+                pageSize: 15,
+                visiblePages: 15,
+                currentPage: 1,
+                getData: function () {
+                    var date = {
+                        KeyWord: $("#KeyWord").val().trim()
+                    };
+                    return date;
+                }
+            });
+        }
+
+    </script>
+}
